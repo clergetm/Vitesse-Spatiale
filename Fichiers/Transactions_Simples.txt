@@ -1,0 +1,15 @@
+#P Planetes_20.txt
+#V Vaisseaux_4.txt
+&
+?1 SUPP-ID75-P Delta_7 Delta_18
+?2 SUPP-ID75-P Delta_7 Delta_18
+?3 SUPP-ID75-P Delta_7 Delta_18
+?1 SUPP-ID100-WP Delta_7 Delta_14
+?2 SUPP-ID100-WP Delta_7 Delta_14
+?3 SUPP-ID100-WP Delta_7 Delta_14
+?1 VITT-MOD-Z150 Delta_7 Delta_5
+?2 VITT-MOD-Z150 Delta_7 Delta_5
+?3 VITT-MOD-Z150 Delta_7 Delta_5
+?1 TURBO-TITAN-Y Delta_7 Delta_1
+?2 TURBO-TITAN-Y Delta_7 Delta_1
+?3 TURBO-TITAN-Y Delta_7 Delta_1

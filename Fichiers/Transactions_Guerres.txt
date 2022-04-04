@@ -1,0 +1,28 @@
+#P Planetes_100.txt
+#V Vaisseaux_4.txt
+&
+?1 SUPP-ID75-P Beta_8 Epsilon_Beta_10
+?2 SUPP-ID75-P Beta_8 Epsilon_Beta_10
+?3 SUPP-ID75-P Beta_8 Epsilon_Beta_10
+?1 SUPP-ID100-WP Beta_8 Alpha_9
+?1 VITT-MOD-Z150 Beta_8 Delta_12
+?2 VITT-MOD-Z150 Beta_8 Delta_12
+?3 VITT-MOD-Z150 Beta_8 Delta_12
+?1 VITT-MOD-Z150 Beta_8 Beta_17
+?1 TURBO-TITAN-Y Beta_17 Gamma_4
+?2 TURBO-TITAN-Y Beta_17 Gamma_4
+?3 TURBO-TITAN-Y Beta_17 Gamma_4
+/ Beta Epsilon_Beta
+/ Beta Alpha
+&
+?1 SUPP-ID75-P Beta_8 Epsilon_Beta_10
+?2 SUPP-ID75-P Beta_8 Epsilon_Beta_10
+?3 SUPP-ID75-P Beta_8 Epsilon_Beta_10
+?1 SUPP-ID100-WP Beta_8 Alpha_9
+?1 VITT-MOD-Z150 Beta_8 Delta_12
+?2 VITT-MOD-Z150 Beta_8 Delta_12
+?3 VITT-MOD-Z150 Beta_8 Delta_12
+?1 VITT-MOD-Z150 Beta_8 Beta_17
+?1 TURBO-TITAN-Y Beta_17 Gamma_4
+?2 TURBO-TITAN-Y Beta_17 Gamma_4
+?3 TURBO-TITAN-Y Beta_17 Gamma_4
