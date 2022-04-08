@@ -141,8 +141,8 @@
   <ItemGroup>
     <ClCompile Include="graphe.cpp" />
     <ClCompile Include="jeu.cpp" />
+    <ClCompile Include="liste.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="noeud.cpp" />
     <ClCompile Include="planete.cpp" />
     <ClCompile Include="route.cpp" />
     <ClCompile Include="vaisseau.cpp" />
@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="graphe.h" />
     <ClInclude Include="jeu.h" />
+    <ClInclude Include="liste.h" />
     <ClInclude Include="noeud.h" />
     <ClInclude Include="planete.h" />
     <ClInclude Include="route.h" />

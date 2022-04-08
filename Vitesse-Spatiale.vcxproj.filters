@@ -33,9 +33,6 @@
     <ClCompile Include="jeu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="noeud.cpp">
-      <Filter>Source Files\Structures</Filter>
-    </ClCompile>
     <ClCompile Include="graphe.cpp">
       <Filter>Source Files\Structures</Filter>
     </ClCompile>
@@ -46,6 +43,9 @@
       <Filter>Source Files\Éléments</Filter>
     </ClCompile>
     <ClCompile Include="route.cpp">
+      <Filter>Source Files\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="liste.cpp">
       <Filter>Source Files\Structures</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,6 +66,9 @@
       <Filter>Header Files\Éléments</Filter>
     </ClInclude>
     <ClInclude Include="route.h">
+      <Filter>Header Files\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="liste.h">
       <Filter>Header Files\Structures</Filter>
     </ClInclude>
   </ItemGroup>
