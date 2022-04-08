@@ -13,10 +13,60 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Structures">
+      <UniqueIdentifier>{fe41877a-a6ef-444e-a552-fd5153c0a6ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Éléments">
+      <UniqueIdentifier>{56f3dbb8-9564-471a-a9ea-7655f640f6a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Éléments">
+      <UniqueIdentifier>{f8cc6909-c004-41e2-bb06-c691eea17355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structures">
+      <UniqueIdentifier>{a30d7d83-b6d2-42f6-b729-3926f39923b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="jeu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="noeud.cpp">
+      <Filter>Source Files\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="graphe.cpp">
+      <Filter>Source Files\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="nation.cpp">
+      <Filter>Source Files\Éléments</Filter>
+    </ClCompile>
+    <ClCompile Include="planete.cpp">
+      <Filter>Source Files\Éléments</Filter>
+    </ClCompile>
+    <ClCompile Include="vaisseau.cpp">
+      <Filter>Source Files\Éléments</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="jeu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graphe.h">
+      <Filter>Header Files\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="noeud.h">
+      <Filter>Header Files\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="nation.h">
+      <Filter>Header Files\Éléments</Filter>
+    </ClInclude>
+    <ClInclude Include="planete.h">
+      <Filter>Header Files\Éléments</Filter>
+    </ClInclude>
+    <ClInclude Include="vaisseau.h">
+      <Filter>Header Files\Éléments</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
