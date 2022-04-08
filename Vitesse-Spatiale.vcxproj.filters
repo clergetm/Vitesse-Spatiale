@@ -39,14 +39,14 @@
     <ClCompile Include="graphe.cpp">
       <Filter>Source Files\Structures</Filter>
     </ClCompile>
-    <ClCompile Include="nation.cpp">
-      <Filter>Source Files\Éléments</Filter>
-    </ClCompile>
     <ClCompile Include="planete.cpp">
       <Filter>Source Files\Éléments</Filter>
     </ClCompile>
     <ClCompile Include="vaisseau.cpp">
       <Filter>Source Files\Éléments</Filter>
+    </ClCompile>
+    <ClCompile Include="route.cpp">
+      <Filter>Source Files\Structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,14 +59,14 @@
     <ClInclude Include="noeud.h">
       <Filter>Header Files\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="nation.h">
-      <Filter>Header Files\Éléments</Filter>
-    </ClInclude>
     <ClInclude Include="planete.h">
       <Filter>Header Files\Éléments</Filter>
     </ClInclude>
     <ClInclude Include="vaisseau.h">
       <Filter>Header Files\Éléments</Filter>
+    </ClInclude>
+    <ClInclude Include="route.h">
+      <Filter>Header Files\Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

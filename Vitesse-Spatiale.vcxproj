@@ -142,17 +142,17 @@
     <ClCompile Include="graphe.cpp" />
     <ClCompile Include="jeu.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="nation.cpp" />
     <ClCompile Include="noeud.cpp" />
     <ClCompile Include="planete.cpp" />
+    <ClCompile Include="route.cpp" />
     <ClCompile Include="vaisseau.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphe.h" />
     <ClInclude Include="jeu.h" />
-    <ClInclude Include="nation.h" />
     <ClInclude Include="noeud.h" />
     <ClInclude Include="planete.h" />
+    <ClInclude Include="route.h" />
     <ClInclude Include="vaisseau.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
