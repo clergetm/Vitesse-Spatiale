@@ -33,9 +33,6 @@
     <ClCompile Include="jeu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="graphe.cpp">
-      <Filter>Source Files\Structures</Filter>
-    </ClCompile>
     <ClCompile Include="planete.cpp">
       <Filter>Source Files\Éléments</Filter>
     </ClCompile>

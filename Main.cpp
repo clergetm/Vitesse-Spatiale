@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "liste.h"
+#include "graphe.h"
 using namespace std;
 
 /*
@@ -54,10 +55,40 @@ void test_Liste() {
 
 }
 
+void test_Graphe() {
+	cout << "/////test_Graphe//////////////////////" << '\n';
+	Liste<int> l = Liste<int>(4);
+
+	l.insererFin(1);
+	l.insererFin(2);
+	l.insererFin(3);
+	l.insererFin(4);
+
+	Graphe<int> g = Graphe<int>(&l);
+	cout << "Insertion" << '\n';
+	cout << " - insertion(0, 1)" << '\n';
+	g.ajouterArete(0, 1);
+	cout << " - insertion(0, 2)" << '\n';
+	g.ajouterArete(0, 2);
+	cout << " - insertion(1, 3)" << '\n';
+	g.ajouterArete(1, 3);
+	cout << " - insertion(2, 3)" << '\n';
+	g.ajouterArete(2, 3);
+
+	cout << "EstArete" << '\n';
+	cout << " - (0,1) : " << g.estArete(0, 1) << '\n';
+	cout << " - (1,2) : " << g.estArete(1, 2) << '\n';
+	cout << " - (1,3) : " << g.estArete(1, 3) << '\n';
+	cout << " - (1,4) : " << g.estArete(1, 4) << '\n';
+
+	cout << "Affichage Matrice" << '\n';
+	cout << g.toStringMatrice() << '\n';
+}
+
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
 
-	test_Liste();
+	test_Graphe();
 
 	system("pause");
 	return 0;
