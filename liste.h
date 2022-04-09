@@ -27,7 +27,7 @@ public:
 	bool estDansListe();		// Vérifier que le noeud courant est dans la liste.
 	void suivant();				// Incrémenter de 1 le compteur courant.
 	T valeurCourante() const;	// Obtenir la valeur courante.
-	string toString();			// Obtenir une représentation textuelle des éléments de la liste.
+	string toString() const;	// Obtenir une représentation textuelle des éléments de la liste.
 	short int longueur() const;	// Obtenir le nombre d’élément dans la liste.
 };
 
@@ -54,7 +54,6 @@ Liste<T>::~Liste() {
 }
 
 //// AUTRES FONCTIONS /////////////////////////////////////////////////////////////////////////////
-
 
 /**
 * Fonction indiquant la présence, ou non, d’un élément dans la liste.
@@ -106,7 +105,6 @@ void Liste<T>::fixerTete() {
 	courant = 0;
 }
 
-
 /**
 * Vérifier que le pointeur courant se trouve dans la liste.
 * @return	true si le pointeur ne se trouve pas en fin de liste, false sinon.
@@ -138,7 +136,7 @@ T Liste<T>::valeurCourante() const {
 * @return	un string avec la représentation textuelle de chaque élément de la liste.
 */
 template <class T>
-string Liste<T>::toString() {
+string Liste<T>::toString() const {
 	string res;
 	for (fixerTete(); estDansListe(); suivant()) {
 		T _temp = valeurCourante();
@@ -155,4 +153,3 @@ template <class T>
 short int Liste<T>::longueur() const {
 	return nbElement;
 }
-
