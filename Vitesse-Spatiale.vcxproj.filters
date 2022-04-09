@@ -45,9 +45,6 @@
     <ClCompile Include="route.cpp">
       <Filter>Source Files\Structures</Filter>
     </ClCompile>
-    <ClCompile Include="liste.cpp">
-      <Filter>Source Files\Structures</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jeu.h">

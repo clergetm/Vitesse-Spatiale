@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="graphe.cpp" />
     <ClCompile Include="jeu.cpp" />
-    <ClCompile Include="liste.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="planete.cpp" />
     <ClCompile Include="route.cpp" />
