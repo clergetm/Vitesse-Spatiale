@@ -5,5 +5,8 @@ using namespace std;
 
 // Constructeur par défaut.
 
-planete::planete(){}
+Planete::Planete(){}
 
+bool Planete::operator==(Planete _planete) {
+	return this->nomPlanete == _planete.nomPlanete;
+}

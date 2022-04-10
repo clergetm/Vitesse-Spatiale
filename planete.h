@@ -4,7 +4,7 @@
 using namespace std;
 
 
-class planete
+class Planete
 {
 private:
 	string nomPlanete;
@@ -14,7 +14,8 @@ private:
 	float prixCarburant;
 
 public:
-	planete();
+	Planete();
+	bool operator == (Planete _planete);
 
 
 

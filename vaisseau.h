@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-class vaisseau
+class Vaisseau
 {
 private:
 	string modele;
@@ -11,7 +11,9 @@ private:
 	
 
 public:
-
+	string getModele() const;
+	float getCapacite() const;
+	bool operator == (Vaisseau);
 
 
 
