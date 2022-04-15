@@ -1,15 +1,21 @@
 #include "vaisseau.h"
-#include <iostream>
 using namespace std;
 
-// Constrûcteur par défaut
+//// CONSTRUCTEURS DESTRUCTEURS ///////////////////////////////////////////////////////////////////
 
+/**
+* Constructeur par défaut.
+* @param	_modele : le nom du vaisseau.
+* @param	_capacite : la capacité en carburant du vaisseau.
+*/
 Vaisseau::Vaisseau(string _modele, float _capacite) {
 	this->modele = _modele;
 	this->capacite = _capacite;
 }
 
-//Destructeur par défaut
+/**
+* Destructeur par défaut
+*/
 Vaisseau::~Vaisseau(){}
 
 //// GETTERS SETTERS //////////////////////////////////////////////////////////////////////////////
@@ -22,11 +28,19 @@ string Vaisseau::getModele() const { return this->modele; }
 
 /**
 * Getter de la capacité en carburant du Vaisseau.
-* @return	la capcité en carburant.
+* @return	la capacité en carburant.
 */
 float Vaisseau::getCapacite() const { return this->capacite; }
 
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
+
+/**
+* Obtenir une représentation textuelle du Vaisseau.
+* @return	un string du modèle et capacité du Vaisseau.
+*/
+string Vaisseau::toString() const {
+	return modele + " " + to_string(capacite);
+}
 
 /**
 * Surcharge de l’opérateur ==.

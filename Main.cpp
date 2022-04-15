@@ -1,94 +1,63 @@
 #include <iostream>
 #include <string>
-#include "liste.h"
-#include "graphe.h"
+#include "planete.h"
+#include "vaisseau.h"
+#include "route.h"
 using namespace std;
 
 /*
+* Membre de l’équipe 5:
 * Lilou		ALLAIN	ALLL26520207
 * Mathys	CLERGET	CLEM14050107
 * Guillaume URVOY	URVG07119904
 */
 
-void test_Liste() {
-	cout << "/////test_Liste///////////////////////" << '\n';
-	Liste<int> l = Liste<int>(4);
+void encadrement(string _titre) { cout << "///// " + _titre + " /////" << endl; }
 
-	l.insererFin(1);
-	l.insererFin(2);
-	l.insererFin(3);
-	l.insererFin(4);
+void test_planete() {
+	encadrement("Test Planète");
 
-	cout << "Affichage liste INT" << '\n';
-	string res;
-	for (l.fixerTete(); l.estDansListe(); l.suivant()) {
-		int _temp = l.valeurCourante();
-		res += to_string(_temp)+ '\n';
-	}
-	cout << res << '\n';
+	Planete p1("planete1",0,0,50,"nation1",2.99);
+	Planete p2("planete2",0,1,100,"nation2",10.99);
 
-	cout << "Trouver" << '\n';
-	cout << "Trouver 1 (doit être true)  : " << l.trouver(1) << '\n';
-	cout << "  - Valeur Courante  : " << l.valeurCourante() << '\n';
+	cout << " nom    : " << p1.getNomPlanete() << '\n';
+	cout << " x      : " << p1.getX() << '\n';
+	cout << " y      : " << p1.getY() << '\n';
+	cout << " pop    : " << p1.getPopulation() << '\n';
+	cout << " nation : " << p1.getNation() << '\n';
+	cout << " prix   : " << p1.getPrixCarburant() << '\n';
+	cout << " string : " << p1.toString() << '\n';
 
-	cout << "Trouver 5 (doit être false) : " << l.trouver(5) << '\n';
-	cout << "  - Valeur Courante  : " << l.valeurCourante() << '\n';
+	cout << "Test p1 == p2 : " << (p1 == p2) << '\n';
+	cout << "Test p1 == p1 : " << (p1 == p1) << '\n';
 
-	cout << "Longueur : " << to_string(l.longueur()) << '\n';
-	cout << "Suppression" << '\n';
-	cout << "- suppression 4 " << '\n';
-	l.supprimer(4);
-	cout << "- suppression 2" << '\n';
-	l.supprimer(2);
-	cout << "- suppression 5" << '\n';
-	l.supprimer(5);
 
-	cout << "Longueur : " << to_string(l.longueur()) << '\n';
-
-	cout << "- Affichage liste INT" << '\n';
-	res = "";
-	for (l.fixerTete(); l.estDansListe(); l.suivant()) {
-		int _temp = l.valeurCourante();
-		res += " - "+to_string(_temp) + '\n';
-	}
-	cout << res << endl;
-
+	encadrement("FIN Planète");
 }
 
-void test_Graphe() {
-	cout << "/////test_Graphe//////////////////////" << '\n';
-	Liste<int> l = Liste<int>(4);
+void test_vaisseau() {
+	encadrement("Test Vaisseau");
+	Vaisseau v1("modele1", 99.90);
+	Vaisseau v2("modele2", 55.50);
 
-	l.insererFin(1);
-	l.insererFin(2);
-	l.insererFin(3);
-	l.insererFin(4);
+	cout << " modele   : " << v1.getModele() << '\n';
+	cout << " capacité : " << v1.getCapacite() << '\n';
+	cout << " string   : " << v1.toString() << '\n';
+	cout << "Test v1 == v2 : " << (v1 == v2) << '\n';
+	cout << "Test v1 == v1 : " << (v1 == v1) << '\n';
 
-	Graphe<int> g = Graphe<int>(&l);
-	cout << "Insertion" << '\n';
-	cout << " - insertion(0, 1)" << '\n';
-	g.ajouterArete(0, 1);
-	cout << " - insertion(0, 2)" << '\n';
-	g.ajouterArete(0, 2);
-	cout << " - insertion(1, 3)" << '\n';
-	g.ajouterArete(1, 3);
-	cout << " - insertion(2, 3)" << '\n';
-	g.ajouterArete(2, 3);
+	encadrement("FIN Vaisseau");
 
-	cout << "EstArete" << '\n';
-	cout << " - (0,1) : " << g.estArete(0, 1) << '\n';
-	cout << " - (1,2) : " << g.estArete(1, 2) << '\n';
-	cout << " - (1,3) : " << g.estArete(1, 3) << '\n';
-	cout << " - (1,4) : " << g.estArete(1, 4) << '\n';
 
-	cout << "Affichage Matrice" << '\n';
-	cout << g.toStringMatrice() << '\n';
+}
+void test_Route() {
+
 }
 
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
 
-	test_Graphe();
+	test_vaisseau();
 
 	system("pause");
 	return 0;

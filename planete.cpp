@@ -1,10 +1,17 @@
 #include "planete.h"
-#include <iostream>
 using namespace std;
 
+//// CONSTRUCTEURS DESTRUCTEURS ///////////////////////////////////////////////////////////////////
 
-// Constructeur par défaut.
-
+/**
+* Constructeur par défaut.
+* @param	_nomPlanete : le nom de la Planète.
+* @param	_x : la coordonnée x de la Planète.
+* @param	_y : la coordonnée y de la Planète.
+* @param	_population : la population de la Planète.
+* @param	_nation : la nation de la Planète.
+* @param	_prixCarburant : le prix du Carburant sur la Planète.
+*/
 Planete::Planete(string _nomPlanete, float _x, float _y, int _population, string _nation, float _prixCarburant ){
 	this->nomPlanete = _nomPlanete;
 	this->x = _x;
@@ -14,8 +21,9 @@ Planete::Planete(string _nomPlanete, float _x, float _y, int _population, string
 	this->prixCarburant = _prixCarburant;
 }
 
-// Destructeur par défaut
-
+/**
+* Destructeur par défaut
+*/
 Planete::~Planete(){}
 
 //// GETTERS SETTERS //////////////////////////////////////////////////////////////////////////////
@@ -25,7 +33,6 @@ Planete::~Planete(){}
 * @return	string du nom de la planète.
 */
 string Planete::getNomPlanete() const { return this->nomPlanete; }
-
 
 /**
 * Getter de la coordonnée x.
@@ -57,8 +64,22 @@ string Planete::getNation() const { return this->nation; }
 */
 float Planete::getPrixCarburant() const { return this->prixCarburant; }
 
+//// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+* Obtenir une représentation textuelle de la Planete.
+* @return	un string avec les éléments de la Planete.
+*/
+string Planete::toString() const {
+	return nomPlanete + " " + to_string(x) + " " + to_string(y) + " "
+		+ to_string(population) + " " + nation + " " + to_string(prixCarburant);
+}
 
+/**
+* Surcharge de l’opérateur ==.
+* @param	_planete : la seconde planete avec laquelle comparer.
+* @return	true si les noms sont les mêmes, false sinon.
+*/
 bool Planete::operator==(Planete _planete) {
 	return this->nomPlanete == _planete.nomPlanete;
 }
