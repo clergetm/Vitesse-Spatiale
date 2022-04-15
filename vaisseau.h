@@ -15,9 +15,9 @@ public:
 	float getCapacite() const;
 	bool operator == (Vaisseau);
 
-
-
-
-
+	Vaisseau(string, float);
+	~Vaisseau();
 };
+
+
 

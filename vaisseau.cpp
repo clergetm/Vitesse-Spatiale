@@ -2,6 +2,16 @@
 #include <iostream>
 using namespace std;
 
+// Constrûcteur par défaut
+
+Vaisseau::Vaisseau(string _modele, float _capacite) {
+	this->modele = _modele;
+	this->capacite = _capacite;
+}
+
+//Destructeur par défaut
+Vaisseau::~Vaisseau(){}
+
 //// GETTERS SETTERS //////////////////////////////////////////////////////////////////////////////
 
 /**

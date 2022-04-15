@@ -8,13 +8,23 @@ class Planete
 {
 private:
 	string nomPlanete;
-	float coord[2];
+	float x;
+	float y;
 	int population;
 	string nation;
 	float prixCarburant;
 
 public:
-	Planete();
+	Planete(string, float, float, int, string, float);
+	~Planete();
+
+	string getNomPlanete() const;
+	float getX() const;
+	float getY() const;
+	int getPopulation() const;
+	string getNation() const;
+	float getPrixCarburant() const;
+
 	bool operator == (Planete _planete);
 
 
