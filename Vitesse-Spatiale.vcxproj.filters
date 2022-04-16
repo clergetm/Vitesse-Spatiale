@@ -42,16 +42,13 @@
     <ClCompile Include="route.cpp">
       <Filter>Source Files\Structures</Filter>
     </ClCompile>
+    <ClCompile Include="graphe.cpp">
+      <Filter>Source Files\Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jeu.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="graphe.h">
-      <Filter>Header Files\Structures</Filter>
-    </ClInclude>
-    <ClInclude Include="noeud.h">
-      <Filter>Header Files\Structures</Filter>
     </ClInclude>
     <ClInclude Include="planete.h">
       <Filter>Header Files\Éléments</Filter>
@@ -62,7 +59,7 @@
     <ClInclude Include="route.h">
       <Filter>Header Files\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="liste.h">
+    <ClInclude Include="graphe.h">
       <Filter>Header Files\Structures</Filter>
     </ClInclude>
   </ItemGroup>

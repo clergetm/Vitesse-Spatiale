@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="graphe.cpp" />
     <ClCompile Include="jeu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="planete.cpp" />
@@ -148,8 +149,6 @@
   <ItemGroup>
     <ClInclude Include="graphe.h" />
     <ClInclude Include="jeu.h" />
-    <ClInclude Include="liste.h" />
-    <ClInclude Include="noeud.h" />
     <ClInclude Include="planete.h" />
     <ClInclude Include="route.h" />
     <ClInclude Include="vaisseau.h" />
