@@ -1,24 +1,25 @@
 #pragma once
+#include <string>
+#include <vector>
 #include "graphe.h"
-#include "liste.h"
 #include "planete.h"
 #include "vaisseau.h"
-#include <string>
 using namespace std;
 
-class jeu
+class Jeu
 {
 private:
-	const string PATH = "Fichiers/";
-
-	Graphe<Planete> systeme;		// Graphe représentant les relations entre les planètes.
-	Liste<string> conflits;			// Liste chaînée des conflits entre nations de ce jeu.
-	Liste<Vaisseau> vaisseaux;		// Liste des vaisseaux du jeu.
-
+	const string PATH = "Fichiers/";	// 
+	//Graphe systeme;					// Graphe Initial représentant les relations entre les planètes.
+	vector<string> conflits;			// Vector des conflits entre nations de ce jeu.
+	vector<Vaisseau> vaisseaux;			// Vector des vaisseaux du jeu.
+	vector<Planete> planetes;			// Vector des planètes du jeu.
 public:
-	jeu();
-	~jeu();
+	Jeu();
+	~Jeu();
 
-	void ouverture_transaction(string _fichierTransaction);
+	void ouverture_transaction(string);
+	void ouverture_stellaire(string);
+	void ouverture_vaisseau(string);
 };
 

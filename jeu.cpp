@@ -4,7 +4,7 @@
 #include <fstream>
 using namespace std;
 
-void ouverture_transaction(string _fichierTransaction) {
+void Jeu::ouverture_transaction(string _fichierTransaction) {
 
 	ifstream fin(_fichierTransaction); //Lecture
 	char caractere;
@@ -85,3 +85,6 @@ void ouverture_transaction(string _fichierTransaction) {
 
 }
 
+void Jeu::ouverture_stellaire(string _fichierPlanetes) {}
+
+void Jeu::ouverture_vaisseau(string _fichierVaisseaux) {}
