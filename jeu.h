@@ -9,8 +9,16 @@ using namespace std;
 class jeu
 {
 private:
+	const string PATH = "Fichiers/";
+
 	Graphe<Planete> systeme;		// Graphe représentant les relations entre les planètes.
 	Liste<string> conflits;			// Liste chaînée des conflits entre nations de ce jeu.
 	Liste<Vaisseau> vaisseaux;		// Liste des vaisseaux du jeu.
+
+public:
+	jeu();
+	~jeu();
+
+	void ouverture_transaction(string _fichierTransaction);
 };
 
