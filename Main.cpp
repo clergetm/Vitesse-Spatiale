@@ -15,37 +15,39 @@ using namespace std;
 
 void encadrement(string _titre) { cout << "///// " + _titre + " /////" << endl; }
 
-void test_planete() {
+void print(string _ele) { cout << _ele << '\n'; }
+
+void test_Planete() {
 	encadrement("Test Planète");
 
 	Planete p1("Delta_1", 589.0f, 596.0f, 297369, "Delta", 68.93f);
 	Planete p2("Delta_2", 598.0f, 656.0f, 3671086, "Delta", 102.45f);
 
-	cout << " nom    : " << p1.getNomPlanete() << '\n';
-	cout << " x      : " << p1.getX() << '\n';
-	cout << " y      : " << p1.getY() << '\n';
-	cout << " pop    : " << p1.getPopulation() << '\n';
-	cout << " nation : " << p1.getNation() << '\n';
-	cout << " prix   : " << p1.getPrixCarburant() << '\n';
-	cout << " string : " << p1.toString() << '\n';
+	print(" nom    : " + p1.getNomPlanete());
+	print(" x      : " + to_string(p1.getX()));
+	print(" y      : " + to_string(p1.getY()));
+	print(" pop    : " + to_string(p1.getPopulation()));
+	print(" nation : " + p1.getNation());
+	print(" prix   : " + to_string(p1.getPrixCarburant()));
+	print(" string : " + p1.toString());
 
-	cout << "Test p1 == p2 : " << (p1 == p2) << '\n';
-	cout << "Test p1 == p1 : " << (p1 == p1) << '\n';
+	print("Test p1 == p2 : " + (p1 == p2));
+	print("Test p1 == p1 : " + (p1 == p1));
 
 
 	encadrement("FIN Planète");
 }
 
-void test_vaisseau() {
+void test_Vaisseau() {
 	encadrement("Test Vaisseau");
 	Vaisseau v1("SUPP-ID75-P", 75);
 	Vaisseau v2("SUPP-ID100-WP", 100);
 
-	cout << " modele   : " << v1.getModele() << '\n';
-	cout << " capacité : " << v1.getCapacite() << '\n';
-	cout << " string   : " << v1.toString() << '\n';
-	cout << "Test v1 == v2 : " << (v1 == v2) << '\n';
-	cout << "Test v1 == v1 : " << (v1 == v1) << '\n';
+	print(" modele   : " + v1.getModele());
+	print(" capacité : " + to_string(v1.getCapacite()));
+	print(" string   : " + v1.toString());
+	print("Test v1 == v2 : " + (v1 == v2));
+	print("Test v1 == v1 : " + (v1 == v1));
 
 	encadrement("FIN Vaisseau");
 }
@@ -69,31 +71,31 @@ void test_Route() {
 
 	encadrement("Initialisation");
 	a1.initialiser(v1.getCapacite());
-	cout << "a1 : " << to_string(a1.distance) << '\n';
+	print("a1 : " + to_string(a1.distance));
 	a2.initialiser(v1.getCapacite());
-	cout << "a2 : " << to_string(a2.distance) << '\n';
+	print("a2 : " + to_string(a2.distance));
 	a3.initialiser(v1.getCapacite());
-	cout << "a3 : " << to_string(a3.distance) << '\n';
+	print("a3 : " + to_string(a3.distance));
 	a4.initialiser(v1.getCapacite());
-	cout << "a4 : " << to_string(a4.distance) << '\n';
+	print("a4 : " + to_string(a4.distance));
 	a5.initialiser(v1.getCapacite());
-	cout << "a5 : " << to_string(a5.distance) << '\n';
+	print("a5 : " + to_string(a5.distance));
 	a6.initialiser(v1.getCapacite());
-	cout << "a6 : " << to_string(a6.distance) << '\n';
+	print("a6 : " + to_string(a6.distance));
 
 	Route r1;
-	cout << "Ajout d’une étape a1" << '\n';
+	print("Ajout d’une étape a1");
 	r1.ajouterEtape(a1);
-	cout << "Ajout d’une étape a2" << '\n'; 
+	print("Ajout d’une étape a2"); 
 	r1.ajouterEtape(a3);
-	cout << "Modification d’une étape a2 -> a3" << '\n';
+	print("Modification d’une étape a2 -> a3");
 	r1.modifierEtape(1,a5);
 
-	cout << " départ   : " << r1.depart().getNomPlanete() << '\n';
-	cout << " arrivée  : " << r1.arrivee().getNomPlanete() << '\n';
-	cout << " cout     : " << to_string(r1.cout()) << '\n';
-	cout << " distance : " << to_string(r1.distance()) << '\n';
-	cout << " toString : " << r1.toString() << '\n';
+	print(" départ   : " + r1.depart().getNomPlanete());
+	print(" arrivée  : " + r1.arrivee().getNomPlanete());
+	print(" cout     : " + to_string(r1.cout()));
+	print(" distance : " + to_string(r1.distance()));
+	print(" toString : " + r1.toString());
 	encadrement("FIN Route");
 
 }
@@ -108,19 +110,22 @@ void test_Graphe() {
 	vector<Planete> planetes = { p1,p2,p3 };
 	Graphe g(&planetes, v1.getCapacite());
 
-	cout << "To String : " << '\n';
-	cout << g.toStringMatrice() << '\n';
+	print("To String : ");
+	print(g.toStringMatrice());
 
 
-	cout << "Retrait de 0,1" << '\n';
+	print("Retrait de 0,1");
 	g.retirerArete(0, 1);
-	cout << "To String : " << '\n';
-	cout << g.toStringMatrice() << '\n';
+	print("To String : ");
+	print(g.toStringMatrice());
 	encadrement("FIN Graphe");
 }
 
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
+	test_Planete();
+	test_Vaisseau();
+	test_Route();
 	test_Graphe();
 	system("pause");
 	return 0;
