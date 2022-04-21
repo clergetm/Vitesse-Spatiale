@@ -10,8 +10,8 @@ private:
 public:
 	Route();										// Constructeur par défaut.
 	~Route();										// Destructeur par défaut.
-	Planete depart() const;							// Getter du point de départ.
-	Planete arrivee() const;						// Getter du point d’arrivée.
+	Planete* depart() const;						// Getter du point de départ.
+	Planete* arrivee() const;						// Getter du point d’arrivée.
 	float cout() const;								// Calcul du cout de cette route.
 	float distance() const;							// Calcul de la distance parcourue avec cette route.
 	void modifierEtape(const short, const Arete);	// Modification d’une étape à un emplacement.

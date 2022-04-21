@@ -18,13 +18,13 @@ Route::~Route(){}
 * Getter du point de départ.
 * @return	La première planète de cette route.
 */
-Planete Route::depart() const { return *(this->etapes.front().src); }
+Planete* Route::depart() const { return this->etapes.front().src; }
 
 /**
 * Getter du point d’arrivée.
 * @return	La dernière planète de cette route.
 */
-Planete Route::arrivee() const { return *(this->etapes.back().dst); }
+Planete* Route::arrivee() const { return this->etapes.back().dst; }
 
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
@@ -99,6 +99,6 @@ string Route::toString() const {
         res += (*it).src->getNomPlanete() + " >> ";
     }
 
-    res += arrivee().getNomPlanete();
+    res += arrivee()->getNomPlanete();
     return res;
 }
