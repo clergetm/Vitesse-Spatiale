@@ -91,6 +91,23 @@ void test_Route() {
 	print("   - " + to_string(a6.getCout()));
 
 	Route r1;
+	print("Test depart arrivée");
+	Planete* depart = r1.depart();
+	if (depart != nullptr) {
+		print(" départ   : " + r1.depart()->getNomPlanete());
+	}
+	else {
+		print(" départ   : Aucun départ");
+	}
+
+	Planete* arrivee = r1.arrivee();
+	if (arrivee != nullptr) {
+		print(" arrivée  : " + r1.arrivee()->getNomPlanete());
+	}
+	else {
+		print(" arrivée  : Aucune arrivee");
+	}
+
 	print("Ajout d’une étape a1");
 	r1.ajouterEtape(a1);
 	print("Ajout d’une étape a2"); 
@@ -118,13 +135,13 @@ void test_Graphe() {
 	Graphe g(&planetes, v1.getCapacite());
 
 	print("To String : ");
-	print(g.toStringMatrice());
+	print(g.toStringMatrice(true,true));
 
 
 	print("Retrait de 0,1");
 	g.retirerArete(0, 1);
 	print("To String : ");
-	print(g.toStringMatrice());
+	print(g.toStringMatrice(true,true));
 
 	print("Test getter");
 	print("- Get : Delta_1 (devrait obtenir Delta_1)");
@@ -148,12 +165,73 @@ void test_Graphe() {
 	encadrement("FIN Graphe");
 }
 
+void test_DFS() {
+	encadrement("Test DFS");
+	Vaisseau v1("PTIT-V", 75);
+	Planete A("A", 10.0f, 10.0f, 297369, "Delta", 68.93f);
+	Planete B("B", 50.0f, 10.0f, 297369, "Delta", 68.93f);
+	Planete C("C", 30.0f, 30.0f, 297369, "Delta", 68.93f);
+	Planete D("D", 30.0f, 50.0f, 297369, "Delta", 68.93f);
+	Planete E("E", 10.0f, 60.0f, 297369, "Delta", 68.93f);
+	Planete F("F", 50.0f, 60.0f, 297369, "Delta", 68.93f);
+
+	vector<Planete> planetes = { A, B, C, D, E, F };
+	Graphe g(&planetes, v1.getCapacite());
+
+	/*
+	* Exemple de graphe possible ici.
+		 A	     B
+		   \   /  |
+			 C	  |
+			 | \  |
+			 D  \ |
+		E---------F
+	*/
+
+	//A-B
+	g.retirerArete(0, 1);
+	//A-D
+	g.retirerArete(0, 3);
+	//A-E
+	g.retirerArete(0, 4);
+	//A-F
+	g.retirerArete(0, 5);
+
+	//B-D
+	g.retirerArete(1, 3);
+	//B-E
+	g.retirerArete(1, 4);
+	//B-F
+	g.retirerArete(1, 5);
+	
+	//C-E
+	g.retirerArete(2, 4);
+	//C-F
+	//g.retirerArete(2, 5);
+
+	//D-E
+	g.retirerArete(3, 4);
+	//D-F
+	g.retirerArete(3, 5);
+
+	//E-F
+	//g.retirerArete(4, 5);
+
+	print("To String : ");
+	print(g.toStringMatrice(false,true));
+
+	print("Parcours DFS");
+	print(g.DFS("A", "E").toString());
+	encadrement("Fin DFS");
+}
+
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
-	test_Planete();
+	/*test_Planete();
 	test_Vaisseau();
 	test_Route();
-	test_Graphe();
+	test_Graphe()*/;
+	test_DFS();
 	system("pause");
 	return 0;
 }
