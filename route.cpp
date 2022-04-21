@@ -18,13 +18,27 @@ Route::~Route(){}
 * Getter du point de départ.
 * @return	La première planète de cette route.
 */
-Planete* Route::depart() const { return this->etapes.front().src; }
+Planete* Route::depart() const { 
+    if (!this->etapes.empty()) {
+        return this->etapes.front().src;
+    }
+    else {
+        return nullptr;
+    }
+}
 
 /**
 * Getter du point d’arrivée.
 * @return	La dernière planète de cette route.
 */
-Planete* Route::arrivee() const { return this->etapes.back().dst; }
+Planete* Route::arrivee() const { 
+    if (!this->etapes.empty()) {
+        return this->etapes.back().dst;
+    }
+    else {
+        return nullptr;
+    }
+}
 
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
@@ -94,11 +108,13 @@ void Route::ajouterEtape(const Arete _etape) {
 * @return   un string avec le nom de toutes les planètes visitées.
 */
 string Route::toString() const {
-    string res ;
-    for (auto it = etapes.cbegin(); it != etapes.cend(); ++it) {
-        res += (*it).src->getNomPlanete() + " >> ";
-    }
+    string res ="";
+    if (!etapes.empty()) {
+        for (auto it = etapes.cbegin(); it != etapes.cend(); ++it) {
+            res += (*it).src->getNomPlanete() + " >> ";
+        }
 
-    res += arrivee()->getNomPlanete();
+        res += arrivee()->getNomPlanete();
+    }
     return res;
 }
