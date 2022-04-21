@@ -19,5 +19,5 @@ public:
 	short getPlaneteidx(const string) const;		// Getter de l’index d’une Planète.
 	void ajouterArete(const short, const short);	// Ajouter une arète à la matrice.
 	void retirerArete(const short, const short);	// Retirer une arète à la matrice.
-	string toStringMatrice() const;					// Représentation textuelle de la Matrice.
+	string toStringMatrice(bool, bool) const;		// Représentation textuelle de la Matrice.
 };

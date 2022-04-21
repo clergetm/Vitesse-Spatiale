@@ -14,9 +14,6 @@ Graphe::Graphe(vector<Planete>* _planetes, float const _limite) {
 	for (short x = 0; x < nbElements; x++) {
 		for (short y = 0; y < nbElements;y++) {
 			if (x != y) {
-				/*this->matrice[x][y].initierNoeud(
-					(&(*planetes)[x]),
-					(&(*planetes)[y]),limite);*/
 				// Initialisation de la structure Arete.
 				this->matrice[x][y] = Arete(&planetes->at(x), &planetes->at(y),limite);
 				this->matrice[x][y].initialiser(limite);
@@ -77,41 +74,45 @@ void Graphe::retirerArete(const short _x, const short _y) {
 
 /**
 * Obtenir la représentation textuelle de la Matrice.
+* @param	_printCout : afficher le cout de voyage sur l’Arete.
+* @param	_printDistance : afficher la distance de parcours l’Arete.
 * @return	un string avec les informations de chaque Arête.
 */
-string Graphe::toStringMatrice() const {
+string Graphe::toStringMatrice(bool _printCout, bool _printDistance) const {
 	string res;
 	for (short x = 0; x < nbElements; x++) {
 		res += "| ";
 		for (short y = 0; y < nbElements; y++) {
-
-			// Gérer cout
-			res += "{ cout :";
-			float cout = matrice[x][y].getCout();
-			if (cout == 0.0f) {
-				res += '0';
-			}
-			else if (cout == OUT_OF_BOUND) {
-				res += "infini";
-			}
-			else {
-				res += to_string(cout);
-			}
-
-			// Gérer distance
-			res += ", dist :";
-			float dist = matrice[x][y].getDistance();
-			if (dist == 0.0f) {
-				res += '0';
-			}
-			else if (dist == OUT_OF_BOUND) {
-				res += "infini";
-			}
-			else {
-				res += to_string(dist);
+			if (_printCout) {
+				// Gérer cout
+				float cout = matrice[x][y].getCout();
+				if (cout == 0.0f) {
+					res += '0';
+				}
+				else if (cout == OUT_OF_BOUND) {
+					res += "inf";
+				}
+				else {
+					res += to_string((int)cout);
+				}
 			}
 
-			res += " } | ";
+			if (_printCout && _printDistance) { res += ", "; }
+
+			if (_printDistance) {
+				// Gérer distance
+				float dist = matrice[x][y].getDistance();
+				if (dist == 0.0f) {
+					res += '0';
+				}
+				else if (dist == OUT_OF_BOUND) {
+					res += "inf";
+				}
+				else {
+					res += to_string((int)dist);
+				}
+			}
+			res += " | ";
 		}
 		res += '\n';
 	}
