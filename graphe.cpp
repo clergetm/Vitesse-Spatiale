@@ -1,4 +1,5 @@
 #include "graphe.h"
+
 ////// CONSTRUCTEURS DESTRUCTEURS /////////////////////////////////////////////////////////////////
 
 /**
@@ -10,12 +11,13 @@ Graphe::Graphe(vector<Planete>* _planetes, float const _limite) {
 	this->planetes = _planetes;
 	this->nbElements = (short)_planetes->size();
 	this->limite = _limite;
+	this->nettoyerVisite();
 	// Initialiser la Matrice.
 	for (short x = 0; x < nbElements; x++) {
-		for (short y = 0; y < nbElements;y++) {
+		for (short y = 0; y < nbElements; y++) {
 			if (x != y) {
 				// Initialisation de la structure Arete.
-				this->matrice[x][y] = Arete(&planetes->at(x), &planetes->at(y),limite);
+				this->matrice[x][y] = Arete(&planetes->at(x), &planetes->at(y), limite);
 				this->matrice[x][y].initialiser(limite);
 			}
 		}
@@ -117,4 +119,80 @@ string Graphe::toStringMatrice(bool _printCout, bool _printDistance) const {
 		res += '\n';
 	}
 	return res;
+}
+
+//// PARCOURS ////
+
+/**
+* Réinitialise la liste des visites à false.
+*/
+void Graphe::nettoyerVisite() {
+	this->visites.fill(false);
+}
+
+/**
+* Parcours DFS pour obtenir une route entre deux Planetes.
+* @param	_src : le nom de la Planete source, le point de départ.
+* @param	_dst : le nom de la Planete destination, l'arrivée.
+* @return	res : la Route complète à emprunter.
+*/
+Route Graphe::DFS(const string _src, const string _dst) {
+	Route res;
+
+	// Si les deux planètes demandées existent, on peut effectuer le parcours DFS.
+	short _idxsrc = getPlaneteidx(_src);
+	short _idxdst = getPlaneteidx(_dst);
+	if (_idxsrc != -1 && _idxdst != -1) {
+		this->nettoyerVisite();
+		short _etape = 0;
+		this->aideDFS(_src, _dst, res, _etape);
+	}
+
+	// Si le chemin ne parvient pas à la destination voulue.
+	if (res.arrivee() == nullptr || res.arrivee()->getNomPlanete() != _dst) {
+		return Route();
+	}
+	return res;
+}
+
+/**
+* Fonction récursive de parcours DFS du Graphe.
+* @param	_src	: La planète source du déplacement.
+* @param	_dst	: La planète destination à atteindre.
+* @param	_route	: La route couramment planifiée.
+* @param	_etape	: L’étape couramment modifiée.
+*/
+void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short& _etape) {
+	// Nous parcourons le graphe si et seulement si la destination n’est pas atteinte.
+	//  Si il n’y a pas d‘arrivée 
+	//   (seulement au lancement)		// Si les noms ne correspondent pas
+	if (_route.arrivee() == nullptr || _route.arrivee()->getNomPlanete() != _dst) {
+
+		// Obtenir l’index de la source et de la destination.
+		short _idxsrc = this->getPlaneteidx(_src);
+		short _idxdst = this->getPlaneteidx(_dst);
+
+		// Marquer visitée cette planète source.
+		this->visites[_idxsrc] = true;
+
+		// On parcourt les autres planètes depuis la planète source.
+		for (short _y = 0; _y < nbElements; _y++) {
+			
+			// On vérifie que l’autre planète est accessible et n’a pas été visité.
+			if (matrice[_idxsrc][_y].getDistance() <= limite && !visites[_y]) {
+			
+				if (_route.arrivee() == nullptr || _route.arrivee()->getNomPlanete() != _dst) {
+					_route.modifierEtape(_etape, matrice[_idxsrc][_y]);
+					// On passe à la prochaine étape.
+					_etape++;
+				}
+				aideDFS(matrice[_idxsrc][_y].dst->getNomPlanete(), _dst, _route, _etape);
+
+			}
+
+		}
+		// On repasse sur cette étape.
+		_etape--;
+
+	}
 }
