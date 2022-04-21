@@ -1,5 +1,4 @@
 #include "graphe.h"
-
 ////// CONSTRUCTEURS DESTRUCTEURS /////////////////////////////////////////////////////////////////
 
 /**
@@ -32,6 +31,22 @@ Graphe::Graphe(vector<Planete>* _planetes, float const _limite) {
 Graphe::~Graphe() {}
 
 //// GETTERS SETTERS //////////////////////////////////////////////////////////////////////////////
+
+/**
+* Getter de l'index d'une Planète
+* @param	_nomPlanete : le nom de la Planete à trouver.
+* @return	l’index d’une Planete correspondante au nom, sinon -1.
+*/
+short Graphe::getPlaneteidx(const string _nomPlanete) const {
+	short i = 0;
+	for (auto ite = planetes->cbegin(); ite != planetes->cend(); ++ite) {
+		if (ite->getNomPlanete() == _nomPlanete) {
+			return i;
+		}
+		i++;
+	}
+	return -1;
+}
 
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
@@ -72,7 +87,7 @@ string Graphe::toStringMatrice() const {
 
 			// Gérer cout
 			res += "{ cout :";
-			float cout = matrice[x][y].cout;
+			float cout = matrice[x][y].getCout();
 			if (cout == 0.0f) {
 				res += '0';
 			}
@@ -85,7 +100,7 @@ string Graphe::toStringMatrice() const {
 
 			// Gérer distance
 			res += ", dist :";
-			float dist = matrice[x][y].distance;
+			float dist = matrice[x][y].getDistance();
 			if (dist == 0.0f) {
 				res += '0';
 			}

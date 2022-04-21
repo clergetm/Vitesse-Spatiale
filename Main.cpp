@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "graphe.h"
 #include "planete.h"
-#include "vaisseau.h"
 #include "route.h"
+#include "vaisseau.h"
 using namespace std;
 
 /*
@@ -71,17 +72,23 @@ void test_Route() {
 
 	encadrement("Initialisation");
 	a1.initialiser(v1.getCapacite());
-	print("a1 : " + to_string(a1.distance));
+	print("a1 : " + to_string(a1.getDistance()));
+	print("   - " + to_string(a1.getCout()));
 	a2.initialiser(v1.getCapacite());
-	print("a2 : " + to_string(a2.distance));
+	print("a2 : " + to_string(a2.getDistance()));
+	print("   - " + to_string(a2.getCout()));
 	a3.initialiser(v1.getCapacite());
-	print("a3 : " + to_string(a3.distance));
+	print("a3 : " + to_string(a3.getDistance()));
+	print("   - " + to_string(a3.getCout()));
 	a4.initialiser(v1.getCapacite());
-	print("a4 : " + to_string(a4.distance));
+	print("a4 : " + to_string(a4.getDistance()));
+	print("   - " + to_string(a4.getCout()));
 	a5.initialiser(v1.getCapacite());
-	print("a5 : " + to_string(a5.distance));
+	print("a5 : " + to_string(a5.getDistance()));
+	print("   - " + to_string(a5.getCout()));
 	a6.initialiser(v1.getCapacite());
-	print("a6 : " + to_string(a6.distance));
+	print("a6 : " + to_string(a6.getDistance()));
+	print("   - " + to_string(a6.getCout()));
 
 	Route r1;
 	print("Ajout d’une étape a1");
@@ -91,8 +98,8 @@ void test_Route() {
 	print("Modification d’une étape a2 -> a3");
 	r1.modifierEtape(1,a5);
 
-	print(" départ   : " + r1.depart().getNomPlanete());
-	print(" arrivée  : " + r1.arrivee().getNomPlanete());
+	print(" départ   : " + r1.depart()->getNomPlanete());
+	print(" arrivée  : " + r1.arrivee()->getNomPlanete());
 	print(" cout     : " + to_string(r1.cout()));
 	print(" distance : " + to_string(r1.distance()));
 	print(" toString : " + r1.toString());
@@ -118,6 +125,26 @@ void test_Graphe() {
 	g.retirerArete(0, 1);
 	print("To String : ");
 	print(g.toStringMatrice());
+
+	print("Test getter");
+	print("- Get : Delta_1 (devrait obtenir Delta_1)");
+	short index = g.getPlaneteidx("Delta_1");
+	if (index != -1) {
+		print(" - " + planetes.at(index).getNomPlanete());
+	}
+	else {
+		print(" - élément introuvable");
+	}
+
+	print("- Get : Delta_4 (devrait obtenir -1)");
+	index = g.getPlaneteidx("Delta_4");
+	if (index != -1) {
+		print(" - " + planetes.at(index).getNomPlanete());
+	}
+	else {
+		print(" - élément introuvable");
+	}
+
 	encadrement("FIN Graphe");
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <deque>
 #include "planete.h"
-#include "graphe.h"
+#include "arete.h"
 
 class Route
 {

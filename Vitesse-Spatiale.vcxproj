@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="arete.cpp" />
     <ClCompile Include="graphe.cpp" />
     <ClCompile Include="jeu.cpp" />
     <ClCompile Include="main.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="vaisseau.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="arete.h" />
     <ClInclude Include="graphe.h" />
     <ClInclude Include="jeu.h" />
     <ClInclude Include="planete.h" />

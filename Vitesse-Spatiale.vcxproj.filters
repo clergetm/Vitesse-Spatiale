@@ -45,6 +45,9 @@
     <ClCompile Include="graphe.cpp">
       <Filter>Source Files\Structures</Filter>
     </ClCompile>
+    <ClCompile Include="arete.cpp">
+      <Filter>Source Files\Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jeu.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files\Structures</Filter>
     </ClInclude>
     <ClInclude Include="graphe.h">
+      <Filter>Header Files\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="arete.h">
       <Filter>Header Files\Structures</Filter>
     </ClInclude>
   </ItemGroup>

@@ -36,7 +36,7 @@ Planete* Route::arrivee() const { return this->etapes.back().dst; }
 float Route::cout() const {
     float res = 0;
     for (auto it = etapes.cbegin(); it != etapes.cend(); ++it) {
-        res += (*it).cout;
+        res += (*it).getCout();
     }
     return res;
 }
@@ -49,7 +49,7 @@ float Route::cout() const {
 float Route::distance() const {
     float res = 0;
     for (auto it = etapes.cbegin(); it != etapes.cend(); ++it) {
-        res += (*it).distance;
+        res += (*it).getDistance();
     }
     return res;
 }
