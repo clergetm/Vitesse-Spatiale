@@ -16,7 +16,7 @@ private:
 	vector<bool> visites;										// Array des (index des) planètes visitées.
 	void aideDFS(const string, const string, Route&, short&);	// Fonction Récursif du parcours DFS.
 	short getMinDistanceIdx(vector<float>&);					// Obtenir l'indice du poids minimal dans la liste des poids.
-	bool EstcompletementVisite() const;							// Vérifier que la liste a été complètement visité.
+	bool estCompletementVisite() const;							// Vérifier que la liste a été complètement visité.
 public:
 	Graphe(vector<Planete>*, const float);						// Constructeur de Graphe.
 	~Graphe();													// Destructeur de Graphe.
@@ -28,4 +28,5 @@ public:
 	void nettoyerVisite();										// Réinitialiser la liste des visites.
 	Route DFS(const string, const string);						// Parcours DFS du Graphe.
 	Route dijkstra(const string, const string);					// Parcours Dijkstra du Graphe.
+	Route kruskal(const string, const string);					// Parcours Kruskal du Graphe.
 };

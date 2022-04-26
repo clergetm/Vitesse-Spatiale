@@ -75,6 +75,19 @@ short Graphe::getMinDistanceIdx(vector<float>& _poids) {
 
 }
 
+/**
+* Vérifie si la liste a été complètement visitée ou non.
+* @return true si aucun élément est à false. false sinon.
+*/
+bool Graphe::estCompletementVisite() const {
+	for (short _idx = 0; _idx < nbElements; _idx++) {
+		if (!visites[_idx]) {
+			return false;
+		}
+	}
+	return true;
+}
+
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -341,14 +354,40 @@ Route Graphe::dijkstra(const string _src, const string _dst) {
 }
 
 /**
-* Vérifie si la liste a été complètement visitée ou non.
-* @return true si aucun élément est à false. false sinon.
+* Parcours Kruskal pour obtenir la route la moins dispendieuse entre deux planètes.
+* @param	_src : le nom de la Planete source, le point de départ.
+* @param	_dst : le nom de la Planete destination, l'arrivée.
+* @return	res : la Route complète à emprunter.
 */
-bool Graphe::EstcompletementVisite() const {
-	for (short _idx = 0; _idx < nbElements; _idx++) {
-		if (!visites[_idx]) {
-			return false;
+Route Graphe::kruskal(const string _src, const string _dst) {
+	Route res;
+
+	short idxSource = getPlaneteidx(_src);
+	short idxDesti = getPlaneteidx(_dst);
+
+	// Si les deux planètes demandées n’existent pas. Inutile de chercher un chemin.
+	if (idxSource == -1 || idxDesti == -1) {
+		return Route();
+	}
+	
+	vector<vector<Arete>> matriceKruskal = matrice;
+
+	// Rendre inaccessible toutes les aretes.
+	for (short x = 0; x < nbElements; x++) {
+		for (short y = x; y < nbElements; y++) {
+			matriceKruskal[x][y].rendreInaccessible();
 		}
 	}
-	return true;
+
+	/*for (short x = 0; x < nbElements; x++) {
+		for (short y = 0; y < nbElements; y++) {
+		}
+	}*/
+
+
+	// Si le chemin ne parvient pas à la destination voulue.
+	if (res.arrivee() == nullptr || res.arrivee()->getNomPlanete() != _dst) {
+		return Route();
+	}
+	return res;
 }
