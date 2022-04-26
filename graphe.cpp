@@ -1,4 +1,6 @@
+#include <algorithm>
 #include "graphe.h"
+using namespace std;
 
 ////// CONSTRUCTEURS DESTRUCTEURS /////////////////////////////////////////////////////////////////
 
@@ -12,15 +14,19 @@ Graphe::Graphe(vector<Planete>* _planetes, float const _limite) {
 	this->nbElements = (short)_planetes->size();
 	this->limite = _limite;
 	this->nettoyerVisite();
+	matrice = vector <vector<Arete>>(planetes->size());
+	
 	// Initialiser la Matrice.
-	for (short x = 0; x < nbElements; x++) {
+	for (short x = 0; x < nbElements; x++){
+		vector<Arete> Colonne(planetes->size(),Arete());
 		for (short y = 0; y < nbElements; y++) {
 			if (x != y) {
 				// Initialisation de la structure Arete.
-				this->matrice[x][y] = Arete(&planetes->at(x), &planetes->at(y), limite);
-				this->matrice[x][y].initialiser(limite);
+				Colonne[y] = Arete(&planetes->at(x), &planetes->at(y), limite);
+				Colonne[y].initialiser(limite);
 			}
 		}
+		matrice[x]=Colonne;
 	}
 }
 
@@ -75,6 +81,16 @@ void Graphe::retirerArete(const short _x, const short _y) {
 }
 
 /**
+* Retirer une arète à la matrice via deux nations.
+* @param	_A : la première nation.
+* @param	_B : la seconde nation.
+*/
+void retirerArete(const string _A, const string _B) {
+
+}
+
+
+/**
 * Obtenir la représentation textuelle de la Matrice.
 * @param	_printCout : afficher le cout de voyage sur l’Arete.
 * @param	_printDistance : afficher la distance de parcours l’Arete.
@@ -127,7 +143,7 @@ string Graphe::toStringMatrice(bool _printCout, bool _printDistance) const {
 * Réinitialise la liste des visites à false.
 */
 void Graphe::nettoyerVisite() {
-	this->visites.fill(false);
+	this->visites = vector<bool>(planetes->size(), false);
 }
 
 /**
@@ -140,9 +156,7 @@ Route Graphe::DFS(const string _src, const string _dst) {
 	Route res;
 
 	// Si les deux planètes demandées existent, on peut effectuer le parcours DFS.
-	short _idxsrc = getPlaneteidx(_src);
-	short _idxdst = getPlaneteidx(_dst);
-	if (_idxsrc != -1 && _idxdst != -1) {
+	if (getPlaneteidx(_src) != -1 && getPlaneteidx(_dst) != -1) {
 		this->nettoyerVisite();
 		short _etape = 0;
 		this->aideDFS(_src, _dst, res, _etape);
@@ -195,4 +209,129 @@ void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short&
 		_etape--;
 
 	}
+}
+
+/**
+* Parcours Dijkstra pour obtenir la route la plus courte entre deux planètes.
+* @param	_src : le nom de la Planete source, le point de départ.
+* @param	_dst : le nom de la Planete destination, l'arrivée.
+* @return	res : la Route complète à emprunter.
+*/
+Route Graphe::dijkstra(const string _src, const string _dst) {
+	Route res;
+
+	const short MAX = planetes->size();
+	short idxSource = getPlaneteidx(_src);
+	short idxDesti = getPlaneteidx(_dst);
+
+	// Si les deux planètes demandées n’existent pas. Inutile de chercher un chemin.
+	if (idxSource == -1 || idxDesti == -1) {
+		return Route();
+ 	}
+
+	//Reinitialisation de la liste des planètes visitées.
+	// Les planètes visitées correspondront aux planètes fixées.
+	this->nettoyerVisite();
+
+	// Initialisation de la liste des poids des planètes
+	vector<float> poids(MAX, OUT_OF_BOUND);
+	// Initialisation de la liste des provenances
+	vector<short> provientDe(MAX, -1);
+
+	short idxCourant = idxSource;
+	poids[idxCourant] = 0;
+	provientDe[idxCourant] = 0;
+	/*
+		* Exemple:
+				  0	 10     20
+		  ______________________
+						10
+		0|		      C ---- A
+		 |	14.14	/ |      |
+		 |		   /  |      |
+	   10|		  E   | 20   | 20
+		 |		   \  |      |
+		 |	14.14	\ |   10 |
+	   20|			  B ---- D
+
+
+	* Exemple à la fin de l’éxécution de la boucle while
+					A	B	C	D	E
+	 poids      :	0	30	10	20	24.14
+	 provientDe :	A	C	A	A	C
+
+	 Le chemin le plus court entre A et B est donc => A > C > E > B (6)
+
+	 (Dans ce programme, les index A-E sont des indices (shorts) représentant l’emplacement des planètes dans le vector planetes)
+	*/
+
+	// Remplir les vector poids et provientDe des valeurs de parcours du graphe par Dijkstra
+	// Utilisation de any_of OU de estCompletementVisite().
+	while (any_of(begin(visites), end(visites), [](bool b) {return b==false; })) {
+		idxCourant = getMinDistanceIdx(poids);
+		visites[idxCourant] = true;
+		for (short _idx = 0; _idx < MAX; _idx++) {
+			if (!visites[_idx] && poids[idxCourant] != OUT_OF_BOUND) {
+				float distance = matrice[idxCourant][_idx].getDistance();
+				if (poids[idxCourant] + distance < poids[_idx]) {
+					// Mettre à jour le poids pour attendre cet indice
+					poids[_idx] = poids[idxCourant] + distance;
+					// Indiquer l’indice ayant permis d’attendre celui
+					provientDe[_idx] = idxCourant;
+				}
+			}
+		}
+
+	}
+	
+	// On passe idxCourant à -1 afin de le réutiliser sans qu’il pose de soucis
+	idxCourant = -1;
+	/*
+		Avec cette boucle, nous allons lire la liste des étapes du chemin pour aller
+		de la source à la destination dans le sens inverse.
+	*/
+	while (idxCourant != idxSource) {
+		idxCourant = provientDe[idxDesti];
+		// On ajoute à chaque fois à l’avant de la liste
+		res.modifierEtape(-1, matrice[idxCourant][idxDesti]);
+		idxDesti = idxCourant;
+	}
+	
+	// Si le chemin ne parvient pas à la destination voulue.
+	if (res.arrivee() == nullptr || res.arrivee()->getNomPlanete() != _dst) {
+		return Route();
+	}
+	return res;
+}
+
+/**
+* Getter de l'indice du poids minimal.
+* Méthode utilisée pour le parcours Dijkstra.
+* @param	_poids : la liste des poids
+* @return	idxMin : l'indice du poids minimal.
+*/
+short Graphe::getMinDistanceIdx(vector<float>& _poids) {
+	float minimum = OUT_OF_BOUND;
+	short idxMin = 0;
+	for (short _idx = 0; _idx < planetes->size(); _idx++) {
+		if (!visites[_idx] && _poids[_idx] < minimum) {
+			minimum = _poids[_idx];
+			idxMin = _idx;
+		}
+	}
+	return idxMin;
+
+}
+
+/**
+* Vérifie si la liste a été complètement visitée ou non.
+* @return true si aucun élément est à false. false sinon.
+*/
+bool Graphe::EstcompletementVisite() const {
+	for (short _idx = 0; _idx < planetes->size(); _idx++) {
+		if (!visites[_idx]) {
+			return false;
+		}
+	}
+	return true;
 }

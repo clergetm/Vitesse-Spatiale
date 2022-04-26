@@ -225,13 +225,61 @@ void test_DFS() {
 	encadrement("Fin DFS");
 }
 
+void test_Dijkstra() {
+	encadrement("Test Dijkstra");
+	Vaisseau v1("PTIT-V", 75);
+	/*
+		* Exemple:
+		  0   10     20
+		  _______________
+					10
+		0|	     C ---- A
+		 |14.14/ |      |
+		 |   /   |      |
+	   10|  E    | 20   | 20
+		 |   \   |      |
+		 |14.14\ |   10 |
+	   20|	     B ---- D
+                  
+	*/
+	Planete A("A", 20.0f, 00.0f, 297369, "Delta", 68.93f);
+	Planete B("B", 10.0f, 20.0f, 297369, "Delta", 68.93f);
+	Planete C("C", 10.0f,  0.0f, 297369, "Delta", 68.93f);
+	Planete D("D", 20.0f, 20.0f, 297369, "Delta", 68.93f);
+	Planete E("E",  0.0f, 10.0f, 297369, "Delta", 68.93f);
+
+	vector<Planete> planetes = { A, B, C, D, E };
+	Graphe g(&planetes, v1.getCapacite());
+
+	//			   A  B
+	g.retirerArete(0, 1);
+
+	//			   A  E
+	g.retirerArete(0, 4);
+
+	//			   C  D
+	g.retirerArete(2, 3);
+	
+	//			   D  E
+	g.retirerArete(3, 4);
+
+	print("To String : ");
+	print(g.toStringMatrice(false, true));
+
+	print("Parcours Dijkstra");
+	print(g.dijkstra("A", "B").toString());
+	encadrement("Fin Dijkstra");
+}
+
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
-	/*test_Planete();
-	test_Vaisseau();
-	test_Route();
-	test_Graphe()*/;
-	test_DFS();
+	encadrement("Lancement des test \n \n \n");
+	//test_Planete();
+	//test_Vaisseau();
+	//test_Route();
+	//test_Graphe();
+	//test_DFS();
+	test_Dijkstra();
 	system("pause");
 	return 0;
 }
