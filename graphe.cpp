@@ -53,6 +53,25 @@ short Graphe::getPlaneteidx(const string _nomPlanete) const {
 	return -1;
 }
 
+/**
+* Getter de l'indice du poids minimal.
+* Méthode utilisée pour le parcours Dijkstra.
+* @param	_poids : la liste des poids
+* @return	idxMin : l'indice du poids minimal.
+*/
+short Graphe::getMinDistanceIdx(vector<float>& _poids) {
+	float minimum = OUT_OF_BOUND;
+	short idxMin = 0;
+	for (short _idx = 0; _idx < planetes->size(); _idx++) {
+		if (!visites[_idx] && _poids[_idx] < minimum) {
+			minimum = _poids[_idx];
+			idxMin = _idx;
+		}
+	}
+	return idxMin;
+
+}
+
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -85,10 +104,25 @@ void Graphe::retirerArete(const short _x, const short _y) {
 * @param	_A : la première nation.
 * @param	_B : la seconde nation.
 */
-void retirerArete(const string _A, const string _B) {
+void Graphe::retirerArete(const string _A, const string _B) {
+	vector<short> planetesDeA,planetesDeB;
+	string nationTmp ="";
+	for (short _idx = 0; _idx < planetes->size(); _idx++) {
+		nationTmp = planetes->at(_idx).getNation();
+		if (nationTmp == _A) {
+			planetesDeA.push_back(_idx);
+		}
+		else if (nationTmp == _B) {
+			planetesDeB.push_back(_idx);
+		}
+	}
 
+	for (short x : planetesDeA) {
+		for (short y : planetesDeB) {
+			retirerArete(x, y);
+		}
+	}
 }
-
 
 /**
 * Obtenir la représentation textuelle de la Matrice.
@@ -302,25 +336,6 @@ Route Graphe::dijkstra(const string _src, const string _dst) {
 		return Route();
 	}
 	return res;
-}
-
-/**
-* Getter de l'indice du poids minimal.
-* Méthode utilisée pour le parcours Dijkstra.
-* @param	_poids : la liste des poids
-* @return	idxMin : l'indice du poids minimal.
-*/
-short Graphe::getMinDistanceIdx(vector<float>& _poids) {
-	float minimum = OUT_OF_BOUND;
-	short idxMin = 0;
-	for (short _idx = 0; _idx < planetes->size(); _idx++) {
-		if (!visites[_idx] && _poids[_idx] < minimum) {
-			minimum = _poids[_idx];
-			idxMin = _idx;
-		}
-	}
-	return idxMin;
-
 }
 
 /**
