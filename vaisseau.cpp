@@ -29,6 +29,8 @@ string Vaisseau::getModele() const { return this->modele; }
 */
 float Vaisseau::getCapacite() const { return this->capacite; }
 
+Graphe& Vaisseau::getSysteme() { return this->systeme; }
+
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
 /**
