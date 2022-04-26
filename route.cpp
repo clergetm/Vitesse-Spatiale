@@ -77,7 +77,7 @@ void Route::modifierEtape(const short _index, const Arete _etape){
 	
     // On vérifie que ce ne soit pas le TOUT premier élément que l’on ajoute
     // Ou que l’on souhaite pas modifier un index négatif
-    if (this->etapes.size() != 0 || _index < 0) {
+    if (this->etapes.size() != 0 && _index > 0) {
 
         // On vérifie que l’index que l’on veut modifier est inférieur au nombre d’éléments
         if (_index < this->etapes.size()) {
