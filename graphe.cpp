@@ -11,14 +11,17 @@ using namespace std;
 */
 Graphe::Graphe(vector<Planete>* _planetes, float const _limite) {
 	this->planetes = _planetes;
-	this->nbElements = (short)_planetes->size();
+	this->nbElements = 0;
+	if (_planetes != nullptr) {
+		this->nbElements = (short)_planetes->size();
+	}
 	this->limite = _limite;
 	this->nettoyerVisite();
-	matrice = vector <vector<Arete>>(planetes->size());
+	matrice = vector <vector<Arete>>(nbElements);
 	
 	// Initialiser la Matrice.
 	for (short x = 0; x < nbElements; x++){
-		vector<Arete> Colonne(planetes->size(),Arete());
+		vector<Arete> Colonne(nbElements,Arete());
 		for (short y = 0; y < nbElements; y++) {
 			if (x != y) {
 				// Initialisation de la structure Arete.
@@ -62,7 +65,7 @@ short Graphe::getPlaneteidx(const string _nomPlanete) const {
 short Graphe::getMinDistanceIdx(vector<float>& _poids) {
 	float minimum = OUT_OF_BOUND;
 	short idxMin = 0;
-	for (short _idx = 0; _idx < planetes->size(); _idx++) {
+	for (short _idx = 0; _idx < nbElements; _idx++) {
 		if (!visites[_idx] && _poids[_idx] < minimum) {
 			minimum = _poids[_idx];
 			idxMin = _idx;
@@ -107,7 +110,7 @@ void Graphe::retirerArete(const short _x, const short _y) {
 void Graphe::retirerArete(const string _A, const string _B) {
 	vector<short> planetesDeA,planetesDeB;
 	string nationTmp ="";
-	for (short _idx = 0; _idx < planetes->size(); _idx++) {
+	for (short _idx = 0; _idx < nbElements; _idx++) {
 		nationTmp = planetes->at(_idx).getNation();
 		if (nationTmp == _A) {
 			planetesDeA.push_back(_idx);
@@ -177,7 +180,7 @@ string Graphe::toStringMatrice(bool _printCout, bool _printDistance) const {
 * Réinitialise la liste des visites à false.
 */
 void Graphe::nettoyerVisite() {
-	this->visites = vector<bool>(planetes->size(), false);
+	this->visites = vector<bool>(nbElements, false);
 }
 
 /**
@@ -254,7 +257,6 @@ void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short&
 Route Graphe::dijkstra(const string _src, const string _dst) {
 	Route res;
 
-	const short MAX = planetes->size();
 	short idxSource = getPlaneteidx(_src);
 	short idxDesti = getPlaneteidx(_dst);
 
@@ -268,9 +270,9 @@ Route Graphe::dijkstra(const string _src, const string _dst) {
 	this->nettoyerVisite();
 
 	// Initialisation de la liste des poids des planètes
-	vector<float> poids(MAX, OUT_OF_BOUND);
+	vector<float> poids(nbElements, OUT_OF_BOUND);
 	// Initialisation de la liste des provenances
-	vector<short> provientDe(MAX, -1);
+	vector<short> provientDe(nbElements, -1);
 
 	short idxCourant = idxSource;
 	poids[idxCourant] = 0;
@@ -304,7 +306,7 @@ Route Graphe::dijkstra(const string _src, const string _dst) {
 	while (any_of(begin(visites), end(visites), [](bool b) {return b==false; })) {
 		idxCourant = getMinDistanceIdx(poids);
 		visites[idxCourant] = true;
-		for (short _idx = 0; _idx < MAX; _idx++) {
+		for (short _idx = 0; _idx < nbElements; _idx++) {
 			if (!visites[_idx] && poids[idxCourant] != OUT_OF_BOUND) {
 				float distance = matrice[idxCourant][_idx].getDistance();
 				if (poids[idxCourant] + distance < poids[_idx]) {
@@ -343,7 +345,7 @@ Route Graphe::dijkstra(const string _src, const string _dst) {
 * @return true si aucun élément est à false. false sinon.
 */
 bool Graphe::EstcompletementVisite() const {
-	for (short _idx = 0; _idx < planetes->size(); _idx++) {
+	for (short _idx = 0; _idx < nbElements; _idx++) {
 		if (!visites[_idx]) {
 			return false;
 		}
