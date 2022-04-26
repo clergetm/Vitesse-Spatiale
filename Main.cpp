@@ -42,8 +42,8 @@ void test_Planete() {
 
 void test_Vaisseau() {
 	encadrement("Test Vaisseau");
-	Vaisseau v1("SUPP-ID75-P", 75);
-	Vaisseau v2("SUPP-ID100-WP", 100);
+	Vaisseau v1("SUPP-ID75-P", 75,nullptr);
+	Vaisseau v2("SUPP-ID100-WP", 100,nullptr);
 
 	print(" modele   : " + v1.getModele());
 	print(" capacité : " + to_string(v1.getCapacite()));
@@ -60,8 +60,8 @@ void test_Route() {
 	Planete p1("Delta_1", 589.0f, 596.0f, 297369, "Delta", 68.93f);
 	Planete p2("Delta_2", 598.0f, 656.0f, 3671086, "Delta", 102.45f);
 	Planete p3("Delta_3", 645.0f, 870.0f, 3671086, "Delta", 66.75f);
-	Vaisseau v1("SUPP-ID75-P", 75);
-	Vaisseau v2("SUPP-ID100-WP", 100);
+	Vaisseau v1("SUPP-ID75-P", 75,nullptr);
+	Vaisseau v2("SUPP-ID100-WP", 100,nullptr);
 
 	Arete a1(&p1, &p2, v1.getCapacite());	// a1 : 1 - 2
 	Arete a2(&p2,&p1,v1.getCapacite());		// a2 : 2 - 1
@@ -127,7 +127,7 @@ void test_Route() {
 
 void test_Graphe() {
 	encadrement("test Graphe");
-	Vaisseau v1("SUPP-ID75-P", 75);
+	Vaisseau v1("SUPP-ID75-P", 75,nullptr);
 	Planete p1("Delta_1", 589.0f, 596.0f, 297369, "Delta", 68.93f);
 	Planete p2("Delta_2", 598.0f, 656.0f, 3671086, "Delta", 102.45f);
 	Planete p3("Delta_3", 645.0f, 870.0f, 3671086, "Delta", 66.75f);
@@ -168,7 +168,7 @@ void test_Graphe() {
 
 void test_DFS() {
 	encadrement("Test DFS");
-	Vaisseau v1("PTIT-V", 75);
+	Vaisseau v1("PTIT-V", 75,nullptr);
 	Planete A("A", 10.0f, 10.0f, 297369, "Delta", 68.93f);
 	Planete B("B", 50.0f, 10.0f, 297369, "Delta", 68.93f);
 	Planete C("C", 30.0f, 30.0f, 297369, "Delta", 68.93f);
@@ -228,7 +228,7 @@ void test_DFS() {
 
 void test_Dijkstra() {
 	encadrement("Test Dijkstra");
-	Vaisseau v1("PTIT-V", 75);
+	Vaisseau v1("PTIT-V", 75,nullptr);
 	/*
 		* Exemple:
 		  0   10     20
@@ -275,8 +275,8 @@ void test_Dijkstra() {
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
 	encadrement("Lancement des test \n \n \n");
-	test_Planete();
-	//test_Vaisseau();
+	//test_Planete();
+	test_Vaisseau();
 	//test_Route();
 	//test_Graphe();
 	//test_DFS();

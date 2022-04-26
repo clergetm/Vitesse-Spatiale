@@ -133,7 +133,7 @@ void Jeu::ouverture_vaisseau(string _fichierVaisseaux) {
 	// Tant que l’on peut recupérer les informations
 	while (fin >> Modele) {
 		fin >> Capacite;
-		vaisseaux.push_back(Vaisseau(Modele, Capacite));
+		vaisseaux.push_back(Vaisseau(Modele, Capacite,&(this->planetes)));
 	}
 
 	// Fermer la lecture du fichier

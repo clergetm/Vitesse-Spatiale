@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "graphe.h"
+#include "planete.h"
 using namespace std;
 
 class Vaisseau
@@ -7,8 +10,9 @@ class Vaisseau
 private:
 	string modele;					// Modèle du Vaisseau.
 	float capacite;					// Capacité en carburant du Vaisseau.
+	Graphe systeme;
 public:
-	Vaisseau(string, float);		// Constructeur par défaut.
+	Vaisseau(string, float, vector<Planete>*);		// Constructeur par défaut.
 	~Vaisseau();					// Destructeur par défaut.
 	string getModele() const;		// Getter de modele. 
 	float getCapacite() const;		// Getter de la capacite en carburant.

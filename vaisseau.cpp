@@ -8,10 +8,7 @@ using namespace std;
 * @param	_modele : le nom du vaisseau.
 * @param	_capacite : la capacité en carburant du vaisseau.
 */
-Vaisseau::Vaisseau(string _modele, float _capacite) {
-	this->modele = _modele;
-	this->capacite = _capacite;
-}
+Vaisseau::Vaisseau(string _modele, float _capacite, vector<Planete>* _planetes = nullptr): modele(_modele), capacite(_capacite), systeme(_planetes,this->capacite) {}
 
 /**
 * Destructeur par défaut
