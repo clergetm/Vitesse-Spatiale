@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "planete.h"
+
 using namespace std;
 
 void Jeu::ouverture_transaction(string _fichierTransaction) {
@@ -14,7 +16,8 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 	string typeVaisseau;
 	string PlaneteS;
 	string PlaneteD;
-	
+	string A;
+	string B;
 
 
 	while (fin >> caractere) {
@@ -41,7 +44,6 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 			break;
 		}
 			
-			
 			//Affichage 
 		case '?': {
 			fin >> caractere;
@@ -58,7 +60,6 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 				fin >> typeVaisseau >> PlaneteS >> PlaneteD;
 				cout << "Avec le vaisseau" << typeVaisseau << "la disctance la plus courte entre " << PlaneteS << "et" << PlaneteD << "est : " << "\n";
 
-
 			}
 			if (caractere == '3') {
 				fin >> typeVaisseau >> PlaneteS >> PlaneteD;
@@ -67,24 +68,99 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 			}
 			break;
 		}
+				//
 		case '/':{
-
-
+					
+			fin >> A >> B;
+			cout << "Conflit spatiale entre les nations \n" << endl;
+			ajouter_conflit(A, B);
 				break;
 			}
 
 		case '&':{
 
-				break;
+			for (Planete p : planetes) {
+
+
+				/*
+				* Surcharge de l’opérateur <<. Retour du toString de ColorCell.
+				* @param _out :			le stream de output.
+				* @param _colorcell :	la planete à représenter.
+				* @returns				le stream à jour.
+				*/
+
+				ostream& operator<< (ostream& _out, Planete& _planete) {
+
+					_out << to_string(_planete.getNomPlanete()) << " " << (_planete.getX()) << " " << (_planete.getY()) << " " << (_planete.getPopulation()) << " " << (_planete.getNation()) << " " << (_planete.getPrixCarburant());
+					return _out;
+
+					cout << p << "\n";
+				}	
 			}
 
-		}
+			for (Vaisseau v : vaisseaux) {
 
+				ostream& operator<< (ostream & _out, Planete & _vaisseau) {
+
+					_out << to_string(_vaisseau.getModele()) << " " << (_vaisseau.getCapacite());
+					return _out;
+
+					cout << v << "\n";
+				}
+			}
+				break;
+			}
+		}
+	}
+}
+
+void Jeu::ouverture_stellaire(string _fichierPlanetes) {
+
+	ifstream fin(_fichierPlanetes); //Lecture
+
+		// Variables composant d'une planète
+	string nomPlanete;
+	float x;
+	float y;
+	int population;
+	string nation;
+	float prixCarburant;
+
+	// Tant que l’on peut recupérer les informations
+	while (fin >> nomPlanete) {
+		fin >> x >> y >> population >> nation >> prixCarburant;
+		planetes.push_back(Planete(nomPlanete, x, y, population, nation, prixCarburant));
 	}
 
+	// Fermer la lecture du fichier
+	fin.close();
 
 }
 
-void Jeu::ouverture_stellaire(string _fichierPlanetes) {}
+void Jeu::ouverture_vaisseau(string _fichierVaisseaux) {
 
-void Jeu::ouverture_vaisseau(string _fichierVaisseaux) {}
+	ifstream fin(_fichierVaisseaux); //Lecture
+
+		// Variables composant d'une planète
+	string Modele;
+	float Capacite;
+
+
+	// Tant que l’on peut recupérer les informations
+	while (fin >> Modele) {
+		fin >> Capacite;
+		vaisseaux.push_back(Vaisseau(Modele, Capacite));
+	}
+
+	// Fermer la lecture du fichier
+	fin.close();
+
+}
+
+void Jeu::ajouter_conflit(string _A, string _B) {
+
+	string c = _A + "/" + _B;
+	conflits.push_back(c);
+	systeme.retirerArete(_A, _B);
+
+}
