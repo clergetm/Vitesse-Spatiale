@@ -6,6 +6,18 @@
 
 using namespace std;
 
+
+/**
+* Constructeur par défaut.
+*/
+Jeu::Jeu(){}
+
+/**
+* Destructeur par défaut
+*/
+Jeu::~Jeu(){}
+
+
 void Jeu::ouverture_transaction(string _fichierTransaction) {
 
 	ifstream fin(_fichierTransaction); //Lecture
@@ -78,12 +90,19 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 
 			for (Planete p : planetes) {
 
-				cout << p << "\n";
+				cout << p.getNomPlanete () << " ";
+				cout << p.getX() << " ";
+				cout << p.getY() << " ";
+				cout << p.getPopulation() << " ";
+				cout << p.getNation() << " ";
+				cout << p.getPrixCarburant() << "\n";
+
 			}
 
 			for (Vaisseau v : vaisseaux) {
 
-					cout << v << "\n";
+					cout << v.getModele() << " ";
+					cout << v.getCapacite() << "\n";
 				
 			}
 
@@ -100,7 +119,7 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 
 void Jeu::ouverture_stellaire(string _fichierPlanetes) {
 
-	ifstream fin(_fichierPlanetes); //Lecture
+	ifstream fin(PATH+_fichierPlanetes); //Lecture
 
 		// Variables composant d'une planète
 	string nomPlanete;
@@ -123,7 +142,7 @@ void Jeu::ouverture_stellaire(string _fichierPlanetes) {
 
 void Jeu::ouverture_vaisseau(string _fichierVaisseaux) {
 
-	ifstream fin(_fichierVaisseaux); //Lecture
+	ifstream fin(PATH+_fichierVaisseaux); //Lecture
 
 		// Variables composant d'une planète
 	string Modele;

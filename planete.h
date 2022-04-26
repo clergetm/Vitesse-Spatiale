@@ -22,18 +22,5 @@ public:
 	string getNation() const;							// Getter de la nation de la Planète.
 	float getPrixCarburant() const;						// Getter du prix du Carburant sur la Planète.
 	string toString() const;							// Représentation textuelle des éléments décrivant la Planète.
-	bool operator == (Planete _planete);				// Surcharge de l'opérateur == pour les comparaisons.
-
-	/*
-	* Surcharge de l’opérateur <<. Retour du toString de Planete.
-	* @param _out :			le stream de output.
-	* @param _planete :	la planete à représenter.
-	* @returns				le stream à jour.
-	*/
-
-	friend ostream& operator<< (ostream& _out, Planete& _planete) {
-
-		_out << "hello";
-		return _out;
-	}
+	bool operator == (Planete _planete);				// Surcharge de l'opérateur == pour les comparaisons.	
 };

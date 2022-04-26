@@ -9,11 +9,11 @@ using namespace std;
 class Jeu
 {
 private:
-	const string PATH = "Fichiers/";	// 
-	Graphe systeme;						// Graphe Initial représentant les relations entre les planètes.
 	vector<string> conflits;			// Vector des conflits entre nations de ce jeu.
 	vector<Vaisseau> vaisseaux;			// Vector des vaisseaux du jeu.
 	vector<Planete> planetes;			// Vector des planètes du jeu.
+	const string PATH = "Fichiers/";
+
 public:
 	Jeu();
 	~Jeu();

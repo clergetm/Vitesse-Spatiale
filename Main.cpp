@@ -2,10 +2,13 @@
 #include <string>
 #include <vector>
 #include "graphe.h"
+#include "jeu.h"
 #include "planete.h"
 #include "route.h"
 #include "vaisseau.h"
 using namespace std;
+
+const string PATH = "Fichiers/";
 
 /*
 * Membre de l’équipe 5:
@@ -34,10 +37,16 @@ void test_Planete() {
 
 	print("Test p1 == p2 : " + (p1 == p2));
 	print("Test p1 == p1 : " + (p1 == p1));
-	cout << p1 << '\n';
-	cout << p2 << '\n';
 
 	encadrement("FIN Planète");
+}
+
+void test_jeu() {
+	encadrement("Test Jeu");
+	Jeu jeu;
+	jeu.ouverture_transaction(PATH + "Transactions_Guerres.txt");
+
+	encadrement("FIN Jeu");
 }
 
 void test_Vaisseau() {
@@ -276,11 +285,12 @@ int main() {
 	setlocale(LC_CTYPE, "fr_FR");
 	encadrement("Lancement des test \n \n \n");
 	//test_Planete();
-	test_Vaisseau();
+	//test_Vaisseau();
 	//test_Route();
 	//test_Graphe();
 	//test_DFS();
 	//test_Dijkstra();
+	test_jeu();
 	system("pause");
 	return 0;
 }
