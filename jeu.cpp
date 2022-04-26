@@ -50,10 +50,7 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 			if (caractere == '1') {
 
 				fin >> typeVaisseau >> PlaneteS >> PlaneteD;
-
 				cout << "Existe-il une route entre les planètes" << PlaneteS << "et" << PlaneteD << "pour un vaisseau de type" << typeVaisseau << "\n" << endl;
-
-
 			}
 			if (caractere == '2') {
 
@@ -81,32 +78,19 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 
 			for (Planete p : planetes) {
 
-
-				/*
-				* Surcharge de l’opérateur <<. Retour du toString de ColorCell.
-				* @param _out :			le stream de output.
-				* @param _colorcell :	la planete à représenter.
-				* @returns				le stream à jour.
-				*/
-
-				ostream& operator<< (ostream& _out, Planete& _planete) {
-
-					_out << to_string(_planete.getNomPlanete()) << " " << (_planete.getX()) << " " << (_planete.getY()) << " " << (_planete.getPopulation()) << " " << (_planete.getNation()) << " " << (_planete.getPrixCarburant());
-					return _out;
-
-					cout << p << "\n";
-				}	
+				cout << p << "\n";
 			}
 
 			for (Vaisseau v : vaisseaux) {
 
-				ostream& operator<< (ostream & _out, Planete & _vaisseau) {
-
-					_out << to_string(_vaisseau.getModele()) << " " << (_vaisseau.getCapacite());
-					return _out;
-
 					cout << v << "\n";
-				}
+				
+			}
+
+			for (string c : conflits) {
+
+				cout << c << "\n";
+
 			}
 				break;
 			}
@@ -161,6 +145,6 @@ void Jeu::ajouter_conflit(string _A, string _B) {
 
 	string c = _A + "/" + _B;
 	conflits.push_back(c);
-	systeme.retirerArete(_A, _B);
+	//systeme.retirerArete(_A, _B);
 
 }

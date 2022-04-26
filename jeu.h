@@ -22,8 +22,5 @@ public:
 	void ouverture_transaction(string);
 	void ouverture_stellaire(string);
 	void ouverture_vaisseau(string);
-
-
-	friend ostream& operator<< (ostream& _out, Planete& _planete);	// Surcharge de l'opérateur <<
 };
 

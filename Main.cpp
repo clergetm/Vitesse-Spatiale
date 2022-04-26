@@ -34,7 +34,8 @@ void test_Planete() {
 
 	print("Test p1 == p2 : " + (p1 == p2));
 	print("Test p1 == p1 : " + (p1 == p1));
-
+	cout << p1 << '\n';
+	cout << p2 << '\n';
 
 	encadrement("FIN Planète");
 }
@@ -274,12 +275,12 @@ void test_Dijkstra() {
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
 	encadrement("Lancement des test \n \n \n");
-	//test_Planete();
+	test_Planete();
 	//test_Vaisseau();
 	//test_Route();
 	//test_Graphe();
 	//test_DFS();
-	test_Dijkstra();
+	//test_Dijkstra();
 	system("pause");
 	return 0;
 }
