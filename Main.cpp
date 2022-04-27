@@ -8,7 +8,6 @@
 #include "vaisseau.h"
 using namespace std;
 
-const string PATH = "Fichiers/";
 
 /*
 * Membre de l’équipe 5:
@@ -17,9 +16,13 @@ const string PATH = "Fichiers/";
 * Guillaume URVOY	URVG07119904
 */
 
+//// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
+
 void encadrement(string _titre) { cout << "///// " + _titre + " /////" << endl; }
 
 void print(string _ele) { cout << _ele << '\n'; }
+
+//// TESTS ////////////////////////////////////////////////////////////////////////////////////////
 
 void test_Planete() {
 	encadrement("Test Planète");
@@ -39,14 +42,6 @@ void test_Planete() {
 	print("Test p1 == p1 : " + (p1 == p1));
 
 	encadrement("FIN Planète");
-}
-
-void test_jeu() {
-	encadrement("Test Jeu");
-	Jeu jeu;
-	jeu.ouverture_transaction(PATH + "Transactions_Guerres.txt");
-
-	encadrement("FIN Jeu");
 }
 
 void test_Vaisseau() {
@@ -237,7 +232,6 @@ void test_DFS() {
 
 void test_Dijkstra() {
 	encadrement("Test Dijkstra");
-	Vaisseau v1("PTIT-V", 75,nullptr);
 	/*
 		* Exemple:
 		  0   10     20
@@ -259,27 +253,40 @@ void test_Dijkstra() {
 	Planete E("E",  0.0f, 10.0f, 297369, "Delta", 68.93f);
 
 	vector<Planete> planetes = { A, B, C, D, E };
-	Graphe g(&planetes, v1.getCapacite());
+	Vaisseau v1("PTIT-V", 20, &planetes);
 
 	//			   A  B
-	g.retirerArete(0, 1);
+	v1.getSysteme().retirerArete(0, 1);
 
 	//			   A  E
-	g.retirerArete(0, 4);
+	v1.getSysteme().retirerArete(0, 4);
 
 	//			   C  D
-	g.retirerArete(2, 3);
+	v1.getSysteme().retirerArete(2, 3);
 	
 	//			   D  E
-	g.retirerArete(3, 4);
+	v1.getSysteme().retirerArete(3, 4);
 
 	print("To String : ");
-	print(g.toStringMatrice(false, true));
+	print(v1.getSysteme().toStringMatrice(false, true));
 
-	print("Parcours Dijkstra");
-	print(g.dijkstra("A", "B").toString());
+	print("Parcours Dijkstra distance");
+	print(v1.getSysteme().dijkstra("A", "B","distance").toString());
+	
+	print("Parcours Dijkstra cout");
+	print(v1.getSysteme().dijkstra("A", "B", "cout").toString());
 	encadrement("Fin Dijkstra");
 }
+
+void test_Jeu() {
+	encadrement("Test Jeu");
+	Jeu jeu;
+	jeu.ouverture_transaction("Transactions_Simples.txt");
+
+	encadrement("FIN Jeu");
+}
+
+//// MAIN /////////////////////////////////////////////////////////////////////////////////////////
 
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
@@ -290,7 +297,7 @@ int main() {
 	//test_Graphe();
 	//test_DFS();
 	//test_Dijkstra();
-	test_jeu();
+	//test_Jeu();
 	system("pause");
 	return 0;
 }
