@@ -80,7 +80,7 @@ string Planete::toString() const {
 * @param	_planete : la seconde planete avec laquelle comparer.
 * @return	true si les noms sont les mêmes, false sinon.
 */
-bool Planete::operator==(Planete	 _planete) {
+bool Planete::operator==(Planete _planete) {
 	return this->nomPlanete == _planete.nomPlanete;
 }
 
