@@ -27,6 +27,5 @@ public:
 	string toStringMatrice(bool, bool) const;					// Représentation textuelle de la Matrice.
 	void nettoyerVisite();										// Réinitialiser la liste des visites.
 	Route DFS(const string, const string);						// Parcours DFS du Graphe.
-	Route dijkstra(const string, const string);					// Parcours Dijkstra du Graphe.
-	Route kruskal(const string, const string);					// Parcours Kruskal du Graphe.
+	Route dijkstra(const string, const string, const string);	// Parcours Dijkstra du Graphe.
 };

@@ -143,7 +143,7 @@ void Graphe::retirerArete(const string _A, const string _B) {
 /**
 * Obtenir la représentation textuelle de la Matrice.
 * @param	_printCout : afficher le cout de voyage sur l’Arete.
-* @param	_printDistance : afficher la distance de parcours l’Arete.
+* @param	_printDistance : afficher la poidsCourant de parcours l’Arete.
 * @return	un string avec les informations de chaque Arête.
 */
 string Graphe::toStringMatrice(bool _printCout, bool _printDistance) const {
@@ -168,7 +168,7 @@ string Graphe::toStringMatrice(bool _printCout, bool _printDistance) const {
 			if (_printCout && _printDistance) { res += ", "; }
 
 			if (_printDistance) {
-				// Gérer distance
+				// Gérer poidsCourant
 				float dist = matrice[x][y].getDistance();
 				if (dist == 0.0f) {
 					res += '0';
@@ -267,14 +267,15 @@ void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short&
 * @param	_dst : le nom de la Planete destination, l'arrivée.
 * @return	res : la Route complète à emprunter.
 */
-Route Graphe::dijkstra(const string _src, const string _dst) {
+Route Graphe::dijkstra(const string _src, const string _dst,const string _choix) {
 	Route res;
 
 	short idxSource = getPlaneteidx(_src);
 	short idxDesti = getPlaneteidx(_dst);
 
 	// Si les deux planètes demandées n’existent pas. Inutile de chercher un chemin.
-	if (idxSource == -1 || idxDesti == -1) {
+	// Si le choix n'est pas correcte, inutile d'effectuer une recherche.
+	if (idxSource == -1 || idxDesti == -1 || (_choix != "cout" && _choix != "distance")) {
 		return Route();
  	}
 
@@ -321,10 +322,16 @@ Route Graphe::dijkstra(const string _src, const string _dst) {
 		visites[idxCourant] = true;
 		for (short _idx = 0; _idx < nbElements; _idx++) {
 			if (!visites[_idx] && poids[idxCourant] != OUT_OF_BOUND) {
-				float distance = matrice[idxCourant][_idx].getDistance();
-				if (poids[idxCourant] + distance < poids[_idx]) {
+				float poidsCourant;
+				if (_choix == "distance") {
+					poidsCourant = matrice[idxCourant][_idx].getDistance();
+				}
+				else if (_choix == "cout") {
+					poidsCourant = matrice[idxCourant][_idx].getCout();
+				}
+				if (poids[idxCourant] + poidsCourant < poids[_idx]) {
 					// Mettre à jour le poids pour attendre cet indice
-					poids[_idx] = poids[idxCourant] + distance;
+					poids[_idx] = poids[idxCourant] + poidsCourant;
 					// Indiquer l’indice ayant permis d’attendre celui
 					provientDe[_idx] = idxCourant;
 				}
@@ -346,45 +353,6 @@ Route Graphe::dijkstra(const string _src, const string _dst) {
 		idxDesti = idxCourant;
 	}
 	
-	// Si le chemin ne parvient pas à la destination voulue.
-	if (res.arrivee() == nullptr || res.arrivee()->getNomPlanete() != _dst) {
-		return Route();
-	}
-	return res;
-}
-
-/**
-* Parcours Kruskal pour obtenir la route la moins dispendieuse entre deux planètes.
-* @param	_src : le nom de la Planete source, le point de départ.
-* @param	_dst : le nom de la Planete destination, l'arrivée.
-* @return	res : la Route complète à emprunter.
-*/
-Route Graphe::kruskal(const string _src, const string _dst) {
-	Route res;
-
-	short idxSource = getPlaneteidx(_src);
-	short idxDesti = getPlaneteidx(_dst);
-
-	// Si les deux planètes demandées n’existent pas. Inutile de chercher un chemin.
-	if (idxSource == -1 || idxDesti == -1) {
-		return Route();
-	}
-	
-	vector<vector<Arete>> matriceKruskal = matrice;
-
-	// Rendre inaccessible toutes les aretes.
-	for (short x = 0; x < nbElements; x++) {
-		for (short y = x; y < nbElements; y++) {
-			matriceKruskal[x][y].rendreInaccessible();
-		}
-	}
-
-	/*for (short x = 0; x < nbElements; x++) {
-		for (short y = 0; y < nbElements; y++) {
-		}
-	}*/
-
-
 	// Si le chemin ne parvient pas à la destination voulue.
 	if (res.arrivee() == nullptr || res.arrivee()->getNomPlanete() != _dst) {
 		return Route();
