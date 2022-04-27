@@ -80,7 +80,7 @@ void Route::modifierEtape(const short _index, const Arete _etape){
     if (this->etapes.size() != 0 && _index > 0) {
 
         // On vérifie que l’index que l’on veut modifier est inférieur au nombre d’éléments
-        if (_index < this->etapes.size()) {
+        if (_index < (short)this->etapes.size()) {
             this->etapes[_index] = _etape;
         }
         // Sinon on ajoute simplement à la fin
