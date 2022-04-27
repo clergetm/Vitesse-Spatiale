@@ -29,6 +29,10 @@ string Vaisseau::getModele() const { return this->modele; }
 */
 float Vaisseau::getCapacite() const { return this->capacite; }
 
+/**
+* Getter du système que le Vaisseau peut emprunter.
+* @return	un graphe des planètes.
+*/
 Graphe& Vaisseau::getSysteme() { return this->systeme; }
 
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
