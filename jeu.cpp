@@ -26,20 +26,28 @@ Jeu::~Jeu() {}
  * Le programme nécessite les planètes afin d'instancier les vaisseaux.
  *
  * @param	_fichierTransaction : Le nom du fichier de Transaction.
+* @return   true si l'ouverture et la lecture se font sans encombre. False sinon.
  */
-void Jeu::ouverture_transaction(string _fichierTransaction) {
+bool Jeu::ouverture_transactions(string _fichierTransactions) {
 
-    ifstream fin(_fichierTransaction); //Lecture
+    ifstream fin(_fichierTransactions); //Lecture
 
+    if (!fin) {
+        cout << "Le path fourni : "<< _fichierTransactions <<", ne mène pas à un fichier." << endl;
+        return false;
+    }
     // Variables utilisées pour la transaction
     char caractere;
     string nomFichierSystemeStellaire, nomFichierVaisseaux;
     string typeVaisseau, planeteS, planeteD, nationA, nationB;
+    bool planetesEnMemoire = false;
 
-    // Tant qu'on peut lire le premier caractère de chaque ligne.
-    while (fin >> caractere) {
-        switch (caractere) {
-            // On souhaite lire un autre fichier txt
+    try {
+        cout << "Lecture en cours de : " << _fichierTransactions << '\n';
+        // Tant qu'on peut lire le premier caractère de chaque ligne.
+        while (fin >> caractere) {
+            switch (caractere) {
+                // On souhaite lire un autre fichier txt
             case '#': {
 
                 // Il faut savoir quel autre fichier est à lire, un fichier de Planetes, ou un fichier de Vaisseaux.
@@ -48,19 +56,31 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
                 if (caractere == 'P') {
                     cout << "Charge les différentes planètes en mémoire \n" << endl;
                     fin >> nomFichierSystemeStellaire;
-                    ouverture_planetes(nomFichierSystemeStellaire);
+                    if (ouverture_planetes(nomFichierSystemeStellaire)) {
+                        planetesEnMemoire = true;
+                    }
+                    else {
+                        throw invalid_argument("Les planètes n'ont pas été chargé.");
+                    }
                 }
 
                 //Charger les types de vaisseau en mémoire
                 if (caractere == 'V') {
                     cout << "Charge les différents vaisseaux en mémoire \n" << endl;
                     fin >> nomFichierVaisseaux;
-                    ouverture_vaisseaux(nomFichierVaisseaux);
+                    if(planetesEnMemoire) {
+                        if (!ouverture_vaisseaux(nomFichierVaisseaux)) {
+                            throw invalid_argument("Les vaisseaux n'ont pas été chargé.");
+                        }
+                    }
+                    else {
+                        throw invalid_argument("Vous ne pouvez pas charger les vaisseaux sans les planètes ");
+                    }
                 }
                 break;
             }
 
-            // On souhaite exécuter trouver une route à partir d'une requête.
+                    // On souhaite exécuter trouver une route à partir d'une requête.
             case '?': {
                 // Il faut savoir de quel type de requête il s'agit.
                 fin >> caractere;
@@ -69,8 +89,8 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
                 if (caractere == '1') {
 
                     fin >> typeVaisseau >> planeteS >> planeteD;
-                    cout << "Existe-t-il une route entre les planètes " << planeteS << " et " << planeteD << " pour un vaisseau de type " << typeVaisseau << "?"<< endl;
-                    planifierRoute("DFS",typeVaisseau, planeteS, planeteD);
+                    cout << "Existe-t-il une route entre les planètes " << planeteS << " et " << planeteD << " pour un vaisseau de type " << typeVaisseau << "?" << endl;
+                    planifierRoute("DFS", typeVaisseau, planeteS, planeteD);
 
                 }
 
@@ -79,7 +99,7 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
 
                     fin >> typeVaisseau >> planeteS >> planeteD;
                     cout << "Existe-t-il une route la plus courte entre les planètes " << planeteS << " et " << planeteD << " pour un vaisseau de type " << typeVaisseau << "?" << endl;
-                //    planifierRoute("Dijkstra-distance", typeVaisseau, planeteS, planeteD);
+                    //    planifierRoute("Dijkstra-distance", typeVaisseau, planeteS, planeteD);
                     cout << " NE FONCTIONNE PAS POUR L INSTANT" << endl;
                 }
 
@@ -87,13 +107,13 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
                 if (caractere == '3') {
                     fin >> typeVaisseau >> planeteS >> planeteD;
                     cout << "Existe-t-il une route la moins dispendieux entre les planètes " << planeteS << " et " << planeteD << " pour un vaisseau de type " << typeVaisseau << "?" << endl;
-                //    planifierRoute("Dijkstra-cout", typeVaisseau, planeteS, planeteD);
+                    //    planifierRoute("Dijkstra-cout", typeVaisseau, planeteS, planeteD);
                     cout << " NE FONCTIONNE PAS POUR L INSTANT" << endl;
 
                 }
                 break;
             }
-            // On souhaite ajouter un conflit entre deux nations.
+                    // On souhaite ajouter un conflit entre deux nations.
             case '/': {
 
                 fin >> nationA >> nationB;
@@ -101,7 +121,7 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
                 ajouter_conflit(nationA, nationB);
                 break;
             }
-            // On souhaite afficher les informations en mémoire.
+                    // On souhaite afficher les informations en mémoire.
             case '&': {
                 cout << "Affichages des informations en mémoire " << '\n';
                 cout << "_________________________________________" << '\n';
@@ -128,17 +148,30 @@ void Jeu::ouverture_transaction(string _fichierTransaction) {
                 break;
             }
             }
+        }
     }
+    catch (exception& e) {
+        cout << e.what() << endl;
+        cout << "Une erreur est survenue lors de la lecture du fichier de transaction." << endl;
+        return false;
+    }
+
+    fin.close();
+    return true;
 }
 
 /**
 * Ouverture d'un fichier de planetes.
 * @param    _fichierPlanetes : Le nom du fichier des Planetes.
+* @return   true si l'ouverture et la lecture se font sans encombre. False sinon.
 */
-void Jeu::ouverture_planetes(string _fichierPlanetes) {
+bool Jeu::ouverture_planetes(string _fichierPlanetes) {
 
     ifstream fin(_fichierPlanetes); //Lecture
-
+    if (!fin) {
+        cout << "Le path fourni : " << _fichierPlanetes << ", ne mène pas à un fichier." << endl;
+        return false;
+    }
     // Variables composant d'une planète
     string nomPlanete;
     float x;
@@ -147,38 +180,55 @@ void Jeu::ouverture_planetes(string _fichierPlanetes) {
     string nation;
     float prixCarburant;
 
-    // Tant que l’on peut recupérer les informations
-    while (fin >> nomPlanete) {
-        fin >> x >> y >> population >> nation >> prixCarburant;
-        planetes.push_back(Planete(nomPlanete, x, y, population, nation, prixCarburant));
+    try {
+        cout << "Lecture en cours de : " << _fichierPlanetes << '\n';
+        // Tant que l’on peut recupérer les informations
+        while (fin >> nomPlanete) {
+            fin >> x >> y >> population >> nation >> prixCarburant;
+            planetes.push_back(Planete(nomPlanete, x, y, population, nation, prixCarburant));
+        }
     }
+    catch(exception&){
+        cout << "Une erreur est survenue lors de la lecture du fichier des planetes." << endl;
+        return false;
+    }
+
 
     // Fermer la lecture du fichier
     fin.close();
-
+    return true;
 }
 
 /**
 * Ouverture d'un fichier de vaisseaux.
 * @param    _fichierVaisseaux : Le nom du fichier des Vaisseaux.
+* @return   true si l'ouverture et la lecture se font sans encombre. False sinon.
 */
-void Jeu::ouverture_vaisseaux(string _fichierVaisseaux) {
+bool Jeu::ouverture_vaisseaux(string _fichierVaisseaux) {
 
     ifstream fin(_fichierVaisseaux); //Lecture
-
+    if (!fin) {
+        cout << "Le path fourni : " << _fichierVaisseaux << ", ne mène pas à un fichier." << endl;
+        return false;
+    }
     // Variables composant d'une planète
     string Modele;
     float Capacite;
-
-    // Tant que l’on peut recupérer les informations
-    while (fin >> Modele) {
-        fin >> Capacite;
-        vaisseaux.push_back(Vaisseau(Modele, Capacite, &planetes));
+    try {
+        cout << "Lecture en cours de : " << _fichierVaisseaux << '\n';
+        // Tant que l’on peut recupérer les informations
+        while (fin >> Modele) {
+            fin >> Capacite;
+            vaisseaux.push_back(Vaisseau(Modele, Capacite, &planetes));
+        }
     }
-
+    catch (exception&) {
+        cout << "Une erreur est survenue lors de la lecture du fichier des vaisseaux." << endl;
+        return false;
+    }
     // Fermer la lecture du fichier
     fin.close();
-
+    return true;
 }
 
 /**

@@ -280,7 +280,15 @@ void test_Dijkstra() {
 void test_Jeu() {
 	encadrement("Test Jeu");
 	Jeu jeu;
-	jeu.ouverture_transaction("Transactions_Simples.txt");
+	print("Test avec toto");
+	jeu.ouverture_transactions("toto.txt");
+	print("Test avec premier Test");
+	jeu.ouverture_transactions("Transactions_Test.txt");
+	print("Test avec second Test");
+	jeu.ouverture_transactions("Transactions_Test2.txt");
+
+	//print("Test avec Transactions_Simples");
+	//jeu.ouverture_transactions("Transactions_Simples.txt");
 
 	encadrement("FIN Jeu");
 }
