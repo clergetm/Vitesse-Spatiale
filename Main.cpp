@@ -172,7 +172,6 @@ void test_Graphe() {
 
 void test_DFS() {
 	encadrement("Test DFS");
-	Vaisseau v1("PTIT-V", 75,nullptr);
 	Planete A("A", 10.0f, 10.0f, 297369, "Delta", 68.93f);
 	Planete B("B", 50.0f, 10.0f, 297369, "Delta", 68.93f);
 	Planete C("C", 30.0f, 30.0f, 297369, "Delta", 68.93f);
@@ -181,7 +180,7 @@ void test_DFS() {
 	Planete F("F", 50.0f, 60.0f, 297369, "Delta", 68.93f);
 
 	vector<Planete> planetes = { A, B, C, D, E, F };
-	Graphe g(&planetes, v1.getCapacite());
+	Vaisseau v1("PTIT-V", 75, &planetes);
 
 	/*
 	* Exemple de graphe possible ici.
@@ -194,39 +193,39 @@ void test_DFS() {
 	*/
 
 	//A-B
-	g.retirerArete(0, 1);
+	v1.getSysteme().retirerArete(0, 1);
 	//A-D
-	g.retirerArete(0, 3);
+	v1.getSysteme().retirerArete(0, 3);
 	//A-E
-	g.retirerArete(0, 4);
+	v1.getSysteme().retirerArete(0, 4);
 	//A-F
-	g.retirerArete(0, 5);
+	v1.getSysteme().retirerArete(0, 5);
 
 	//B-D
-	g.retirerArete(1, 3);
+	v1.getSysteme().retirerArete(1, 3);
 	//B-E
-	g.retirerArete(1, 4);
+	v1.getSysteme().retirerArete(1, 4);
 	//B-F
-	g.retirerArete(1, 5);
+	v1.getSysteme().retirerArete(1, 5);
 	
 	//C-E
-	g.retirerArete(2, 4);
+	v1.getSysteme().retirerArete(2, 4);
 	//C-F
 	//g.retirerArete(2, 5);
 
 	//D-E
-	g.retirerArete(3, 4);
+	v1.getSysteme().retirerArete(3, 4);
 	//D-F
-	g.retirerArete(3, 5);
+	v1.getSysteme().retirerArete(3, 5);
 
 	//E-F
 	//g.retirerArete(4, 5);
 
 	print("To String : ");
-	print(g.toStringMatrice(false,true));
+	print(v1.getSysteme().toStringMatrice(false,true));
 
 	print("Parcours DFS");
-	print(g.DFS("A", "E").toString());
+	print(v1.getSysteme().DFS("A", "E").toString());
 	encadrement("Fin DFS");
 }
 
@@ -290,14 +289,14 @@ void test_Jeu() {
 
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
-	encadrement("Lancement des test \n \n \n");
+	encadrement("Lancement des test");
 	//test_Planete();
 	//test_Vaisseau();
 	//test_Route();
 	//test_Graphe();
-	//test_DFS();
-	//test_Dijkstra();
-	//test_Jeu();
+	test_DFS();
+	test_Dijkstra();
+	test_Jeu();
 	system("pause");
 	return 0;
 }
