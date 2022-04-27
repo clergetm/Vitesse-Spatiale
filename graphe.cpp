@@ -204,8 +204,6 @@ void Graphe::nettoyerVisite() {
 */
 Route Graphe::DFS(const string _src, const string _dst) {
 	Route res;
-	cout << this->toStringMatrice(true, true) << endl;
-
 	// Si les deux planètes demandées existent, on peut effectuer le parcours DFS.
 	if (getPlaneteidx(_src) != -1 && getPlaneteidx(_dst) != -1) {
 		this->nettoyerVisite();
