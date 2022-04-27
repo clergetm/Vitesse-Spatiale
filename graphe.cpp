@@ -64,7 +64,7 @@ short Graphe::getPlaneteidx(const string _nomPlanete) const {
 */
 short Graphe::getMinDistanceIdx(vector<float>& _poids) {
 	float minimum = OUT_OF_BOUND;
-	short idxMin = 0;
+	short idxMin = -1;
 	for (short _idx = 0; _idx < nbElements; _idx++) {
 		if (!visites[_idx] && _poids[_idx] < minimum) {
 			minimum = _poids[_idx];
@@ -204,6 +204,7 @@ void Graphe::nettoyerVisite() {
 */
 Route Graphe::DFS(const string _src, const string _dst) {
 	Route res;
+	cout << this->toStringMatrice(true, true) << endl;
 
 	// Si les deux planètes demandées existent, on peut effectuer le parcours DFS.
 	if (getPlaneteidx(_src) != -1 && getPlaneteidx(_dst) != -1) {
@@ -290,7 +291,8 @@ Route Graphe::dijkstra(const string _src, const string _dst,const string _choix)
 
 	short idxCourant = idxSource;
 	poids[idxCourant] = 0;
-	provientDe[idxCourant] = 0;
+	provientDe[idxCourant] = idxSource;
+	float poidsCourant = OUT_OF_BOUND;
 	/*
 		* Exemple:
 				  0	 10     20
@@ -322,7 +324,6 @@ Route Graphe::dijkstra(const string _src, const string _dst,const string _choix)
 		visites[idxCourant] = true;
 		for (short _idx = 0; _idx < nbElements; _idx++) {
 			if (!visites[_idx] && poids[idxCourant] != OUT_OF_BOUND) {
-				float poidsCourant;
 				if (_choix == "distance") {
 					poidsCourant = matrice[idxCourant][_idx].getDistance();
 				}
