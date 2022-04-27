@@ -40,6 +40,11 @@ Planete* Route::arrivee() const {
     }
 }
 
+bool Route::estVide() const
+{
+    return etapes.empty();
+}
+
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
 /**
