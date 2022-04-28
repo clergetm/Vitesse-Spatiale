@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <iostream>
 #include "graphe.h"
 using namespace std;
 
@@ -246,7 +245,6 @@ void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short&
 			if (matrice[_idxsrc][_y].getDistance() <= limite && !visites[_y]) {
 			
 				if (_route.arrivee() == nullptr || _route.arrivee()->getNomPlanete() != _dst) {
-					cout << " Ajout ["<< to_string(_etape)<<"]: " << to_string(_idxsrc) << " - " << to_string(_y) << '\n';
 					_route.modifierEtape(_etape, matrice[_idxsrc][_y]);
 					// On passe à la prochaine étape.
 					_etape++;
@@ -323,7 +321,6 @@ Route Graphe::dijkstra(const string _src, const string _dst,const string _choix)
 	// Utilisation de any_of OU de estCompletementVisite().
 	while (any_of(begin(visites), end(visites), [](bool b) {return b==false; })) {
 		idxCourant = getMinDistanceIdx(poids);
-
 		// Si idxCourant est égale à -1 c'est que nous ne pouvons pas aller plus loin, nous arrêtons le parcours là.
 		if (idxCourant == -1) {
 			break;
@@ -348,6 +345,10 @@ Route Graphe::dijkstra(const string _src, const string _dst,const string _choix)
 
 	}
 	
+	// Si aucun sommet ne mène à la destination, on n'a pas de Route.
+	if (provientDe[idxDesti] == -1) {
+		return Route();
+	}
 	// On passe idxCourant à -1 afin de le réutiliser sans qu’il pose de soucis
 	idxCourant = -1;
 	/*
