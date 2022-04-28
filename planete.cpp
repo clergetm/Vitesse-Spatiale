@@ -71,7 +71,7 @@ float Planete::getPrixCarburant() const { return this->prixCarburant; }
 * @return	un string avec les éléments de la Planete.
 */
 string Planete::toString() const {
-	return nomPlanete + " " + to_string(x) + " " + to_string(y) + " "
+	return nomPlanete + " " + to_string((short)x) + " " + to_string((short)y) + " "
 		+ to_string(population) + " " + nation + " " + to_string(prixCarburant);
 }
 
