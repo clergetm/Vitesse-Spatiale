@@ -42,7 +42,7 @@ Graphe& Vaisseau::getSysteme() { return this->systeme; }
 * @return	un string du modèle et capacité du Vaisseau.
 */
 string Vaisseau::toString() const {
-	return modele + " " + to_string(capacite);
+	return modele + " " + to_string((short)capacite);
 }
 
 /**
