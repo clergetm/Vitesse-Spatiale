@@ -283,9 +283,8 @@ void test_Jeu() {
 	print("Test avec toto");jeu.ouverture_transactions("toto.txt");
 	print("Test avec premier Test");jeu.ouverture_transactions("Transactions_Test.txt");
 	print("Test avec second Test");jeu.ouverture_transactions("Transactions_Test2.txt");
-
 	print("Test avec Transactions_Simples");jeu.ouverture_transactions("Transactions_Simples.txt");
-
+	print("Test du Menu"); jeu.menu();
 	encadrement("FIN Jeu");
 }
 
@@ -300,7 +299,10 @@ int main() {
 	//test_Graphe();
 	//test_DFS();
 	//test_Dijkstra();
-	test_Jeu();
+	//test_Jeu();
+
+	Jeu le_jeu_le_plus_fantastique_du_vingt_et_unieme_siecle;
+	le_jeu_le_plus_fantastique_du_vingt_et_unieme_siecle.menu();
 	system("pause");
 	return 0;
 }
