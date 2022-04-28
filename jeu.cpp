@@ -91,6 +91,7 @@ bool Jeu::ouverture_transactions(string _fichierTransactions) {
                     fin >> typeVaisseau >> planeteS >> planeteD;
                     cout << "Existe-t-il une route entre les planètes " << planeteS << " et " << planeteD << " pour un vaisseau de type " << typeVaisseau << "?" << endl;
                     planifierRoute("DFS", typeVaisseau, planeteS, planeteD);
+                    cout << "\n\n";
 
                 }
 
@@ -99,17 +100,18 @@ bool Jeu::ouverture_transactions(string _fichierTransactions) {
 
                     fin >> typeVaisseau >> planeteS >> planeteD;
                     cout << "Existe-t-il une route la plus courte entre les planètes " << planeteS << " et " << planeteD << " pour un vaisseau de type " << typeVaisseau << "?" << endl;
-                    //    planifierRoute("Dijkstra-distance", typeVaisseau, planeteS, planeteD);
-                    cout << " NE FONCTIONNE PAS POUR L INSTANT" << endl;
+                    planifierRoute("Dijkstra-distance", typeVaisseau, planeteS, planeteD);
+                    //cout << " NE FONCTIONNE PAS POUR L INSTANT" << endl;
+                    cout << "\n\n";
                 }
 
                 // Il s'agit de trouver le chemin le moins dispendieux entre deux planètes.
                 if (caractere == '3') {
                     fin >> typeVaisseau >> planeteS >> planeteD;
                     cout << "Existe-t-il une route la moins dispendieux entre les planètes " << planeteS << " et " << planeteD << " pour un vaisseau de type " << typeVaisseau << "?" << endl;
-                    //    planifierRoute("Dijkstra-cout", typeVaisseau, planeteS, planeteD);
-                    cout << " NE FONCTIONNE PAS POUR L INSTANT" << endl;
-
+                    planifierRoute("Dijkstra-cout", typeVaisseau, planeteS, planeteD);
+                    //cout << " NE FONCTIONNE PAS POUR L INSTANT" << endl;
+                    cout << "\n\n";
                 }
                 break;
             }
@@ -181,6 +183,8 @@ bool Jeu::ouverture_planetes(string _fichierPlanetes) {
     float prixCarburant;
 
     try {
+        // Supprimer les planétes précédentes.
+        planetes.clear();
         cout << "Lecture en cours de : " << _fichierPlanetes << '\n';
         // Tant que l’on peut recupérer les informations
         while (fin >> nomPlanete) {
@@ -211,10 +215,13 @@ bool Jeu::ouverture_vaisseaux(string _fichierVaisseaux) {
         cout << "Le path fourni : " << _fichierVaisseaux << ", ne mène pas à un fichier." << endl;
         return false;
     }
+
     // Variables composant d'une planète
     string Modele;
     float Capacite;
     try {
+        // Supprimer les vaisseaux précédents.
+        vaisseaux.clear();
         cout << "Lecture en cours de : " << _fichierVaisseaux << '\n';
         // Tant que l’on peut recupérer les informations
         while (fin >> Modele) {
@@ -266,7 +273,7 @@ void Jeu::planifierRoute(const string _parcours, const string _modele, const str
         }
     }
     if (v == nullptr) {
-        cout << "Ce modèle n'existe pas." << endl;
+        cout << " - Ce modèle n'existe pas." << endl;
         return;
     }
 
@@ -280,18 +287,21 @@ void Jeu::planifierRoute(const string _parcours, const string _modele, const str
         res = v->getSysteme().dijkstra(_depart, _arrivee, "cout");
     }
     else {
-        cout << "Ce parcours n'existe pas" << endl;
+        cout << " - Ce parcours n'existe pas" << endl;
         return;
     }
 
     if (res.estVide()) {
-        cout << "Aucune route n'existe entre les planètes " << _depart << " et " << _arrivee << '\n';
-        cout << "Pour le modèle : " << _modele << endl;
+        cout << " - Aucune route n'existe entre les planètes " << _depart << " et " << _arrivee << ", pour le modèle : " << _modele << endl;
         return;
     }
 
-    cout << "Il existe une route entre les planètes " << _depart << " et " << _arrivee << '\n';
-    cout << "Pour le modèle : " << _modele << '\n';
-    cout << res.toString() << endl;
-
+    cout << " - Il existe une route entre les planètes " << _depart << " et " << _arrivee <<  ", pour le modèle : " << _modele << '\n';
+    cout << " - " << res.toString() << endl;
+    if (_parcours == "Dijkstra-distance") {
+        cout << " - La distance à parcourir est de : " << res.distance() << '\n';
+    }
+    else if (_parcours == "Dijkstra-cout") {
+        cout << " - Le cout total est de           : " << res.cout() << '\n';
+    }
 }
