@@ -16,7 +16,7 @@ using namespace std;
 Jeu::Jeu() {}
 
 /**
- * Destructeur par défaut
+ * Destructeur par défaut.
  */
 Jeu::~Jeu() {}
 
@@ -98,7 +98,7 @@ void Jeu::menu() {
 
 /**
 * Méthode Initiant un menu dans la console permettant à l'utilisateur de lancer ses propres commandes.
-* @param    _keep : Les données déjà en mémoire sont conservées si true. Supprimées sinon.
+* @param    _keep : les données déjà en mémoire sont conservées si true. Supprimées sinon.
 */
 void Jeu::menuCommandes(bool _keep) {
 
@@ -265,12 +265,13 @@ void Jeu::menuCommandes(bool _keep) {
 }
 
 //// OUVERTURES ///
+
 /**
  * Ouverture et execution d'un fichier de transactions.
  * Les transactions ne peuvent pas s'exécuter si le fichier des vaisseaux doit être lu avant le fichier des planètes.
  * Le programme nécessite les planètes afin d'instancier les vaisseaux.
  *
- * @param	_fichierTransaction : Le nom du fichier de Transaction.
+ * @param	_fichierTransaction : le nom du fichier de Transaction.
 * @return   true si l'ouverture et la lecture se font sans encombre. False sinon.
  */
 bool Jeu::ouverture_transactions(string _fichierTransactions) {
@@ -365,7 +366,7 @@ bool Jeu::ouverture_transactions(string _fichierTransactions) {
 
 /**
 * Ouverture d'un fichier de planetes.
-* @param    _fichierPlanetes : Le nom du fichier des Planetes.
+* @param    _fichierPlanetes : le nom du fichier des Planetes.
 * @return   true si l'ouverture et la lecture se font sans encombre. False sinon.
 */
 bool Jeu::ouverture_planetes(string _fichierPlanetes) {
@@ -411,7 +412,7 @@ bool Jeu::ouverture_planetes(string _fichierPlanetes) {
 
 /**
 * Ouverture d'un fichier de vaisseaux.
-* @param    _fichierVaisseaux : Le nom du fichier des Vaisseaux.
+* @param    _fichierVaisseaux : le nom du fichier des Vaisseaux.
 * @return   true si l'ouverture et la lecture se font sans encombre. False sinon.
 */
 bool Jeu::ouverture_vaisseaux(string _fichierVaisseaux) {
@@ -451,10 +452,11 @@ bool Jeu::ouverture_vaisseaux(string _fichierVaisseaux) {
 }
 
 //// AUTRES ///////
+
 /**
 * Ajouter un conflit entre deux nations.
-* @param    _nationA : La première nation.
-* @param    _nationB : La seconde nation.
+* @param    _nationA : la première nation.
+* @param    _nationB : la seconde nation.
 */
 void Jeu::ajouter_conflit(string _nationA, string _nationB) {
 
@@ -471,10 +473,10 @@ void Jeu::ajouter_conflit(string _nationA, string _nationB) {
 }
 
 /**
-* @param    _parcours   : Le type de parcours emprunté.
-* @param    _modele     : Le modèle du vaisseau.
-* @param	_depart     : La planète source du déplacement.
-* @param	_arrivee    : La planète destination à atteindre.
+* @param    _parcours : le type de parcours emprunté.
+* @param    _modele :   le modèle du vaisseau.
+* @param	_depart :   la planète source du déplacement.
+* @param	_arrivee :  la planète destination à atteindre.
 */
 void Jeu::planifierRoute(const string _parcours, const string _modele, const string _depart, const string _arrivee) {
     Route res;
