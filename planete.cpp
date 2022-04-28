@@ -5,12 +5,12 @@ using namespace std;
 
 /**
 * Constructeur par défaut.
-* @param	_nomPlanete : le nom de la Planète.
-* @param	_x : la coordonnée x de la Planète.
-* @param	_y : la coordonnée y de la Planète.
-* @param	_population : la population de la Planète.
-* @param	_nation : la nation de la Planète.
-* @param	_prixCarburant : le prix du Carburant sur la Planète.
+* @param	_nomPlanete :		le nom de la Planète.
+* @param	_x :				la coordonnée x de la Planète.
+* @param	_y :				la coordonnée y de la Planète.
+* @param	_population :		la population de la Planète.
+* @param	_nation :			la nation de la Planète.
+* @param	_prixCarburant :	le prix du Carburant sur la Planète.
 */
 Planete::Planete(string _nomPlanete, float _x, float _y, int _population, string _nation, float _prixCarburant ){
 	this->nomPlanete = _nomPlanete;
@@ -22,7 +22,7 @@ Planete::Planete(string _nomPlanete, float _x, float _y, int _population, string
 }
 
 /**
-* Destructeur par défaut
+* Destructeur par défaut.
 */
 Planete::~Planete(){}
 
@@ -30,7 +30,7 @@ Planete::~Planete(){}
 
 /**
 * Getter du nom de la planète.
-* @return	string du nom de la planète.
+* @return	le nom de la planète.
 */
 string Planete::getNomPlanete() const { return this->nomPlanete; }
 
@@ -83,6 +83,3 @@ string Planete::toString() const {
 bool Planete::operator==(Planete _planete) {
 	return this->nomPlanete == _planete.nomPlanete;
 }
-
-
-
