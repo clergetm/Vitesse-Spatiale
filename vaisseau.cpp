@@ -5,13 +5,13 @@ using namespace std;
 
 /**
 * Constructeur par défaut.
-* @param	_modele : le nom du vaisseau.
+* @param	_modele :	le nom du vaisseau.
 * @param	_capacite : la capacité en carburant du vaisseau.
 */
 Vaisseau::Vaisseau(string _modele, float _capacite, vector<Planete>* _planetes = nullptr): modele(_modele), capacite(_capacite), systeme(_planetes,this->capacite) {}
 
 /**
-* Destructeur par défaut
+* Destructeur par défaut.
 */
 Vaisseau::~Vaisseau(){}
 
@@ -19,7 +19,7 @@ Vaisseau::~Vaisseau(){}
 
 /**
 * Getter du Modèle du Vaisseau.
-* @return	string du modèle du vaisseau.
+* @return	le modèle du vaisseau.
 */
 string Vaisseau::getModele() const { return this->modele; }
 
