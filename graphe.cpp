@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 #include "graphe.h"
 using namespace std;
 
@@ -245,17 +246,20 @@ void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short&
 			if (matrice[_idxsrc][_y].getDistance() <= limite && !visites[_y]) {
 			
 				if (_route.arrivee() == nullptr || _route.arrivee()->getNomPlanete() != _dst) {
+					cout << " Ajout ["<< to_string(_etape)<<"]: " << to_string(_idxsrc) << " - " << to_string(_y) << '\n';
 					_route.modifierEtape(_etape, matrice[_idxsrc][_y]);
 					// On passe à la prochaine étape.
 					_etape++;
+					aideDFS(matrice[_idxsrc][_y].dst->getNomPlanete(), _dst, _route, _etape);
+					_etape--;
 				}
-				aideDFS(matrice[_idxsrc][_y].dst->getNomPlanete(), _dst, _route, _etape);
+			
 
 			}
 
 		}
 		// On repasse sur cette étape.
-		_etape--;
+		//_etape--;
 
 	}
 }
@@ -319,6 +323,11 @@ Route Graphe::dijkstra(const string _src, const string _dst,const string _choix)
 	// Utilisation de any_of OU de estCompletementVisite().
 	while (any_of(begin(visites), end(visites), [](bool b) {return b==false; })) {
 		idxCourant = getMinDistanceIdx(poids);
+
+		// Si idxCourant est égale à -1 c'est que nous ne pouvons pas aller plus loin, nous arrêtons le parcours là.
+		if (idxCourant == -1) {
+			break;
+		}
 		visites[idxCourant] = true;
 		for (short _idx = 0; _idx < nbElements; _idx++) {
 			if (!visites[_idx] && poids[idxCourant] != OUT_OF_BOUND) {
