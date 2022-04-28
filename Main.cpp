@@ -8,7 +8,6 @@
 #include "vaisseau.h"
 using namespace std;
 
-
 /*
 * Membre de l’équipe 5:
 * Lilou		ALLAIN	ALLL26520207
@@ -18,8 +17,17 @@ using namespace std;
 
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+* Encadrer un message de '//' avant et après.
+* @param	_titre : le message à encadrer.
+*/
 void encadrement(string _titre) { cout << "///// " + _titre + " /////" << endl; }
 
+/**
+* Fonction pour 'cout' un element avec '\n' en fin de ligne.
+* (La fonction existe seulement pour nous gagner du temps sur les tests.)
+* @param _ele : l'élément à afficher.
+*/
 void print(string _ele) { cout << _ele << '\n'; }
 
 //// TESTS ////////////////////////////////////////////////////////////////////////////////////////
@@ -292,7 +300,7 @@ void test_Jeu() {
 
 int main() {
 	setlocale(LC_CTYPE, "fr_FR");
-	encadrement("Lancement des test");
+	// encadrement("Lancement des test");
 	//test_Planete();
 	//test_Vaisseau();
 	//test_Route();
