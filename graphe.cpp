@@ -60,7 +60,7 @@ short Graphe::getPlaneteidx(const string _nomPlanete) const {
 * Getter de l'indice du poids minimal.
 * Méthode utilisée pour le parcours Dijkstra.
 * @param	_poids : la liste des poids
-* @return	idxMin : l'indice du poids minimal.
+* @return	l'indice du poids minimal.
 */
 short Graphe::getMinDistanceIdx(vector<float>& _poids) {
 	float minimum = OUT_OF_BOUND;
@@ -77,7 +77,7 @@ short Graphe::getMinDistanceIdx(vector<float>& _poids) {
 
 /**
 * Vérifie si la liste a été complètement visitée ou non.
-* @return true si aucun élément est à false. false sinon.
+* @return	true si aucun élément est à false. false sinon.
 */
 bool Graphe::estCompletementVisite() const {
 	for (short _idx = 0; _idx < nbElements; _idx++) {
@@ -117,18 +117,18 @@ void Graphe::retirerArete(const short _x, const short _y) {
 
 /**
 * Retirer une arète à la matrice via deux nations.
-* @param	_A : la première nation.
-* @param	_B : la seconde nation.
+* @param	_nationA : la première nation.
+* @param	_nationB : la seconde nation.
 */
-void Graphe::retirerArete(const string _A, const string _B) {
+void Graphe::retirerArete(const string _nationA, const string _nationB) {
 	vector<short> planetesDeA,planetesDeB;
 	string nationTmp ="";
 	for (short _idx = 0; _idx < nbElements; _idx++) {
 		nationTmp = planetes->at(_idx).getNation();
-		if (nationTmp == _A) {
+		if (nationTmp == _nationA) {
 			planetesDeA.push_back(_idx);
 		}
-		else if (nationTmp == _B) {
+		else if (nationTmp == _nationB) {
 			planetesDeB.push_back(_idx);
 		}
 	}
@@ -144,7 +144,7 @@ void Graphe::retirerArete(const string _A, const string _B) {
 * Obtenir la représentation textuelle de la Matrice.
 * @param	_printCout : afficher le cout de voyage sur l’Arete.
 * @param	_printDistance : afficher la poidsCourant de parcours l’Arete.
-* @return	un string avec les informations de chaque Arête.
+* @return	les informations de chaque Arête.
 */
 string Graphe::toStringMatrice(bool _printCout, bool _printDistance) const {
 	string res;
@@ -200,7 +200,7 @@ void Graphe::nettoyerVisite() {
 * Parcours DFS pour obtenir une route entre deux Planetes.
 * @param	_src : le nom de la Planete source, le point de départ.
 * @param	_dst : le nom de la Planete destination, l'arrivée.
-* @return	res : la Route complète à emprunter.
+* @return	la Route complète à emprunter.
 */
 Route Graphe::DFS(const string _src, const string _dst) {
 	Route res;
@@ -220,10 +220,10 @@ Route Graphe::DFS(const string _src, const string _dst) {
 
 /**
 * Fonction récursive de parcours DFS du Graphe.
-* @param	_src	: La planète source du déplacement.
-* @param	_dst	: La planète destination à atteindre.
-* @param	_route	: La route couramment planifiée.
-* @param	_etape	: L’étape couramment modifiée.
+* @param	_src :	la planète source du déplacement.
+* @param	_dst :	la planète destination à atteindre.
+* @param	_route:	la route couramment planifiée.
+* @param	_etape:	l’étape couramment modifiée.
 */
 void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short& _etape) {
 	// Nous parcourons le graphe si et seulement si la destination n’est pas atteinte.
@@ -266,7 +266,7 @@ void Graphe::aideDFS(const string _src, const string _dst, Route& _route, short&
 * Parcours Dijkstra pour obtenir la route la plus courte entre deux planètes.
 * @param	_src : le nom de la Planete source, le point de départ.
 * @param	_dst : le nom de la Planete destination, l'arrivée.
-* @return	res : la Route complète à emprunter.
+* @return	la Route complète à emprunter.
 */
 Route Graphe::dijkstra(const string _src, const string _dst,const string _choix) {
 	Route res;
