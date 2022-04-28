@@ -12,9 +12,9 @@ Arete::Arete() {
 
 /**
 * Constructeur de Arete.
-* @param	_src : La planete source.
-* @param	_dst : La planete destination.
-* @param	_limite : la capacité en carburant du vaisseau, soit sa limite de déplacement.
+* @param	_src :		la planete source.
+* @param	_dst :		la planete destination.
+* @param	_limite :	la capacité en carburant du vaisseau, soit sa limite de déplacement.
 */
 Arete::Arete(Planete* _src, Planete* _dst, const float _limite) {
 	this->src = _src;
