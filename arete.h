@@ -4,6 +4,7 @@ constexpr auto OUT_OF_BOUND = numeric_limits<float>::max();
 
 /**
 * Classe représentant les arètes, les liens entre les différentes planètes.
+* Chaque arète est composée des distances et cout afin d’aller de la planète source à la planète destination.
 */
 class Arete
 {

@@ -40,6 +40,10 @@ Planete* Route::arrivee() const {
     }
 }
 
+/**
+* Vérifier si la deque d’étapes est vide ou non.
+* @return   true si la deque d’étape est vide. false sinon.
+*/
 bool Route::estVide() const
 {
     return etapes.empty();

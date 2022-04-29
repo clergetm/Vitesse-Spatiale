@@ -5,6 +5,11 @@
 #include "planete.h"
 using namespace std;
 
+/**
+* Implementation des vaisseaux.
+* Les vaisseaux determine les relations entre les sommets d’un graphe.
+* La distance entre deux sommets ne peut pas être supérieur à la capacité en carburant du vaisseau.
+*/
 class Vaisseau
 {
 private:

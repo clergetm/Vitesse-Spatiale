@@ -6,6 +6,10 @@
 #include "vaisseau.h"
 using namespace std;
 
+/**
+* Implémentation du Jeu Vitesse Spatiale.
+* Classe principale du projet.
+*/
 class Jeu
 {
 private:

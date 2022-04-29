@@ -326,7 +326,7 @@ Route Graphe::dijkstra(const string _src, const string _dst,const string _choix)
 	* Exemple à la fin de l’éxécution de la boucle while
 					A	B	C	D	E
 	 poids      :	0	30	10	20	24.14
-	 provientDe :	A	C	A	A	C
+	 provientDe :	A	E	A	A	C
 
 	 Le chemin le plus court entre A et B est donc => A > C > E > B (6)
 
