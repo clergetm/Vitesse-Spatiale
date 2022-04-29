@@ -13,14 +13,18 @@ private:
 	string nation;										// Le nom de la nation dirigeant la Planète.
 	float prixCarburant;								// le prix du Carburant sur la Planète.
 public:
-	Planete(string, float, float, int, string, float);	// Constructeur par défaut de la Planète.
+
+	Planete();											// Constructeur par défaut.
+	Planete(string, float, float, int, string, float);	// Constructeur de la Planète.
 	~Planete();											// Destructeur par défaut de la Planète.
 	string getNomPlanete() const;						// Getter du nom de la Planète.
-	float getX() const;									// Geter de la coordonnée x de la Planète.
+	float getX() const;									// Getter de la coordonnée x de la Planète.
 	float getY() const;									// Getter de la coordonnée x de la Planète.
 	int getPopulation() const;							// Getter de la population de la Planète.
 	string getNation() const;							// Getter de la nation de la Planète.
 	float getPrixCarburant() const;						// Getter du prix du Carburant sur la Planète.
 	string toString() const;							// Représentation textuelle des éléments décrivant la Planète.
-	bool operator == (Planete _planete);				// Surcharge de l'opérateur == pour les comparaisons.	
+	friend ostream& operator<< (ostream&, Planete&);	// Surcharge de l’opérateur <<.
+	friend istream& operator>> (istream&, Planete&);	// Surcharge de l’opérateur >>.
+
 };

@@ -64,14 +64,7 @@ void Jeu::menu() {
             if (transactionsEffectue) {
                 cout << "  - Voulez-vous conserver les planètes, vaisseaux et conflits créés par les transactions ? [Y/n]: ";
                 cin >> caractere;
-                if (caractere == 'Y') {
-                    cout << "  - Les informations seront conservées" << '\n';
-                    keep = true;
-                }
-                else {
-                    cout << "  - Les informations ne seront pas conservées" << '\n';
-                    keep = false;
-                }
+                keep = (caractere == 'Y');
             }
 
             // Le joueur rentre dans le menu des Commandes.
@@ -194,6 +187,7 @@ void Jeu::menuCommandes(bool _keep) {
             // On vérifie s'il on veut ouvrir un fichier de planètes ou de vaisseaux.
             if (typeCommande == 'P') {
                 planetesEnMemoire = ouverture_planetes(parametres[1]);
+                vaisseauxEnMemoire = false;
             }
 
             else if (typeCommande == 'V') {
@@ -377,14 +371,6 @@ bool Jeu::ouverture_planetes(string _fichierPlanetes) {
         return false;
     }
 
-    // Variables composant d'une planète
-    string nomPlanete;
-    float x;
-    float y;
-    int population;
-    string nation;
-    float prixCarburant;
-
     try {
         cout << "Charge les différentes planètes en mémoire \n" << endl;
         // Supprimer les planétes précédentes.
@@ -392,9 +378,9 @@ bool Jeu::ouverture_planetes(string _fichierPlanetes) {
         vaisseaux.clear();
         cout << "Lecture en cours de : " << _fichierPlanetes << '\n';
         // Tant que l’on peut recupérer les informations
-        while (fin >> nomPlanete) {
-            fin >> x >> y >> population >> nation >> prixCarburant;
-            planetes.push_back(Planete(nomPlanete, x, y, population, nation, prixCarburant));
+        Planete temp;
+        while (fin >> temp) {
+            planetes.push_back(temp);
         }
     }
     catch(exception&){
@@ -427,18 +413,15 @@ bool Jeu::ouverture_vaisseaux(string _fichierVaisseaux) {
         cout << "Il faut que les planètes soient enregistrées avant d'enregistrer les vaisseaux." << endl;
         return false;
     }
-    // Variables composant d'une planète
-    string Modele;
-    float Capacite;
     try {
         cout << "Charge les différents vaisseaux en mémoire \n" << endl;
         // Supprimer les vaisseaux précédents.
         vaisseaux.clear();
         cout << "Lecture en cours de : " << _fichierVaisseaux << '\n';
         // Tant que l’on peut recupérer les informations
-        while (fin >> Modele) {
-            fin >> Capacite;
-            vaisseaux.push_back(Vaisseau(Modele, Capacite, &planetes));
+        Vaisseau temp(&planetes);
+        while (fin >> temp) {
+            vaisseaux.push_back(temp);
         }
     }
     catch (exception&) {
@@ -535,13 +518,13 @@ void Jeu::afficherTout() {
 
     cout << "Planètes : " << '\n';
     for (Planete p : planetes) {
-        cout << " - " << p.toString() << "\n";
+        cout << " - " << p << "\n";
     }
     cout << "______________________" << '\n';
     cout << "Vaisseaux : " << '\n';
 
     for (Vaisseau v : vaisseaux) {
-        cout << " - " << v.toString() << "\n";
+        cout << " - " << v << "\n";
     }
 
     cout << "______________________" << '\n';

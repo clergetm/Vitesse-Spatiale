@@ -45,10 +45,6 @@ void test_Planete() {
 	print(" nation : " + p1.getNation());
 	print(" prix   : " + to_string(p1.getPrixCarburant()));
 	print(" string : " + p1.toString());
-
-	print("Test p1 == p2 : " + (p1 == p2));
-	print("Test p1 == p1 : " + (p1 == p1));
-
 	encadrement("FIN Planète");
 }
 
@@ -60,9 +56,6 @@ void test_Vaisseau() {
 	print(" modele   : " + v1.getModele());
 	print(" capacité : " + to_string(v1.getCapacite()));
 	print(" string   : " + v1.toString());
-	print("Test v1 == v2 : " + (v1 == v2));
-	print("Test v1 == v1 : " + (v1 == v1));
-
 	encadrement("FIN Vaisseau");
 }
 
@@ -309,8 +302,10 @@ int main() {
 	//test_Dijkstra();
 	//test_Jeu();
 
+	// Lancement du jeu.
 	Jeu le_jeu_le_plus_fantastique_du_vingt_et_unieme_siecle;
 	le_jeu_le_plus_fantastique_du_vingt_et_unieme_siecle.menu();
+
 	system("pause");
 	return 0;
 }

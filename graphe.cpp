@@ -10,27 +10,7 @@ using namespace std;
 * @param	_limite :	la limite représente la capacité en carburant du vaisseau utilisant ce graphe.
 */
 Graphe::Graphe(vector<Planete>* _planetes, float const _limite) {
-	this->planetes = _planetes;
-	this->nbElements = 0;
-	if (_planetes != nullptr) {
-		this->nbElements = (short)_planetes->size();
-	}
-	this->limite = _limite;
-	this->nettoyerVisite();
-	matrice = vector <vector<Arete>>(nbElements);
-	
-	// Initialiser la Matrice.
-	for (short x = 0; x < nbElements; x++){
-		vector<Arete> Colonne(nbElements,Arete());
-		for (short y = 0; y < nbElements; y++) {
-			if (x != y) {
-				// Initialisation de la structure Arete.
-				Colonne[y] = Arete(&planetes->at(x), &planetes->at(y), limite);
-				Colonne[y].initialiser(limite);
-			}
-		}
-		matrice[x]=Colonne;
-	}
+	hydraterMatrice(_planetes, _limite);
 }
 
 /**
@@ -54,6 +34,14 @@ short Graphe::getPlaneteidx(const string _nomPlanete) const {
 		i++;
 	}
 	return -1;
+}
+
+/**
+* Getter du pointeur du vector de planetes.
+* @return	le pointeur de planetes.
+*/
+vector<Planete>* Graphe::getPlanetesptr() {
+	return this->planetes;
 }
 
 /**
@@ -89,6 +77,34 @@ bool Graphe::estCompletementVisite() const {
 }
 
 //// FONCTIONS ////////////////////////////////////////////////////////////////////////////////////
+
+/**
+* Mettre à jour la Matrice et les informations du graphe.
+* @param	_planetes :	le pointeur du vector de toutes les planètes.
+* @param	_limite :	la limite du vaisseau.
+*/
+void Graphe::hydraterMatrice(vector<Planete>* _planetes,float _limite) {
+	this->planetes = _planetes;
+	this->limite = _limite;
+	this->nbElements = 0;
+	if (_planetes != nullptr) {
+		this->nbElements = (short)_planetes->size();
+	}
+	this->matrice = vector <vector<Arete>>(nbElements);
+	
+	// Initialiser la Matrice.
+	for (short x = 0; x < nbElements; x++) {
+		vector<Arete> Colonne(nbElements, Arete());
+		for (short y = 0; y < nbElements; y++) {
+			if (x != y) {
+				// Initialisation de la structure Arete.
+				Colonne[y] = Arete(&planetes->at(x), &planetes->at(y), limite);
+				Colonne[y].initialiser(limite);
+			}
+		}
+		matrice[x] = Colonne;
+	}
+}
 
 /**
 * Ajouter/ Mettre à jour l’Arete à l’emplacement _x._y.

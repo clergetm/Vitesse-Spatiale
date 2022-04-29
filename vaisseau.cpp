@@ -5,6 +5,11 @@ using namespace std;
 
 /**
 * Constructeur par défaut.
+*/
+Vaisseau::Vaisseau(vector<Planete>* _planetes = nullptr):modele(""),capacite(0), systeme(_planetes,this->capacite) {}
+
+/**
+* Constructeur de Vaisseau.
 * @param	_modele :	le nom du vaisseau.
 * @param	_capacite : la capacité en carburant du vaisseau.
 */
@@ -45,11 +50,30 @@ string Vaisseau::toString() const {
 	return modele + " " + to_string((short)capacite);
 }
 
-/**
-* Surcharge de l’opérateur ==.
-* @param	_vaisseau : le second vaisseau avec lequel comparer.
-* @return	true si les modèles sont les mêmes, false sinon.
+/*
+* Surcharge de l’opérateur <<. Retour du toString de Vaisseau.
+* @param _out :			le stream de output.
+* @param _vaisseau :	le Vaisseau à représenter.
+* @return				le stream à jour.
 */
-bool Vaisseau::operator==(Vaisseau _vaisseau) {
-	return this->modele == _vaisseau.modele;
+ostream& operator<<(ostream& _out, Vaisseau& _vaisseau)
+{
+	_out << _vaisseau.toString();
+	return _out;
+}
+
+/*
+* Surcharge de l’opérateur >>. Récupération des informations formant un Vaisseau.
+* @param _in :			le stream d’input.
+* @param _vaisseau :	le Vaisseau à modifier.
+* @return				Le stream à jour.
+*/
+istream& operator>>(istream& _fin, Vaisseau& _vaisseau)
+{
+	// On récupère les informations
+	_fin >> _vaisseau.modele >> _vaisseau.capacite;
+
+	// On met à jour le systeme de ce vaisseau.
+	_vaisseau.getSysteme().hydraterMatrice(_vaisseau.getSysteme().getPlanetesptr(),_vaisseau.getCapacite());
+	return _fin;
 }

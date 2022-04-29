@@ -20,7 +20,9 @@ private:
 public:
 	Graphe(vector<Planete>*, const float);						// Constructeur de Graphe.
 	~Graphe();													// Destructeur de Graphe.
+	void hydraterMatrice(vector<Planete>*, float);				// Mettre à jour la Matrice et les informations du graphe.
 	short getPlaneteidx(const string) const;					// Getter de l’index d’une Planète.
+	vector<Planete>* getPlanetesptr();							// Getter du pointeur du vector de planètes.
 	void ajouterArete(const short, const short);				// Ajouter une arète à la matrice.
 	void retirerArete(const short, const short);				// Retirer une arète à la matrice.
 	void retirerArete(const string, const string);				// Retirer une arète à la matrice via deux nations.
