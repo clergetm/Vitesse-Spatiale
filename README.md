@@ -10,7 +10,6 @@
   <p align="center">
     Creation du jeu le plus fantastique du vingt et unième siècle..
     <br />
-    <a href="https://github.com/bmnapoleao/hera-project/tree/master/Docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
   </p>
